@@ -21,6 +21,10 @@ body {
 	font-weight: bold;
 }
 
+.navbar-default .navbar-nav>li>a {
+    color: #E7E3D4;
+}
+
 .active {
 	background-color: #E7E3D4;
 }
