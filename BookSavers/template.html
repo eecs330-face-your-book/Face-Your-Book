@@ -1,25 +1,43 @@
 <html>
-<head>
-<title>BookSavers</title>
-</head>
-<body>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="booksavers.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<div id="logo">
-	<img src="images/logo3.png">
-</div>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Dashboard</a></li>
-      <li><a href="#">Book Log</a></li>
-      <li><a href="#">Summaries</a></li>
-      <li><a href="#">Find a New Book</a></li>
-      <li><a href="#">MyRewards</a></li>
-    </ul>
-  </div>
-</nav>
-</body>
+   <head>
+      <title>BookSavers</title>
+   </head>
+   <body>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="booksavers.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <div class="header">
+         <div id = "logo">
+            <img src="images/logo3.png">
+         </div>
+         <div id="logo">
+            <div class="user_button">
+               <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Account Settings</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <ul class="nav navbar-nav">
+               <li class="active"><a href="#">Dashboard</a></li>
+               <li><a href="#">Book Log</a></li>
+               <li><a href="#">Summaries</a></li>
+               <li><a href="#">Find a New Book</a></li>
+               <li><a href="#">MyRewards</a></li>
+            </ul>
+         </div>
+      </nav>
+   </body>
 </html>
