@@ -1,0 +1,26 @@
+
+#login {
+	text-align: left;
+	padding-left: 30px;
+	font-size: 40px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#text {
+	padding: 30px;
+}
+
+.loginbox {
+	margin-left: 37.5%;
+	margin-top: 50px;
+	width: 25%;
+	background-color: #3B8BEB;
+	border-radius: 1em;
+	border: 1px solid #000000;
+}
+
+input {
+ background-color: #E7E3D4;
+ color: black;
+}
