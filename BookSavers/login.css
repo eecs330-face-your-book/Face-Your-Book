@@ -1,7 +1,9 @@
 
 #login {
+
 	text-align: left;
 	padding-left: 30px;
+
 	font-size: 40px;
 	padding-top: 30px;
 	padding-bottom: 30px;
@@ -12,6 +14,7 @@
 }
 
 .loginbox {
+
 	margin-left: 37.5%;
 	margin-top: 50px;
 	width: 25%;
@@ -23,4 +26,9 @@
 input {
  background-color: #E7E3D4;
  color: black;
+
+	margin-left: 25%;
+	margin-top: 50px;
+	width: 50%;
+
 }
