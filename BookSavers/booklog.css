@@ -26,6 +26,11 @@ label {
   text-align: left;
 }
 
+#form-log {
+ float: right;
+ margin-right: 300px;
+}
+
 input {
   /* To make sure that all text fields have the same font settings
      By default, textareas have a monospace font */
@@ -77,6 +82,22 @@ button {
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
+
+.bookLog {
+ border: 1px solid #000000;
+ width: 300px;
+ background-color: #3B8BEB;
+ float: left;
+ margin-left: 650px;
+ border-radius: 1em;
+}
+
+.bookLog h1 {
+
+ font-size: 21px;
+ margin-left: 30px;
+}
+
 
 /* Add styles to the form container */
 .form-container {
