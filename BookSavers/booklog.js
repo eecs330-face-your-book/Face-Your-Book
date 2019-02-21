@@ -8,9 +8,39 @@ Storage.prototype.getObj = function(key) {
 
 function init() {
 	var books = [];
-	localStorage.setObj('books', books);
+  localStorage.setObj('books', books);
+
+  makeBook("Ender's Game", "Orson Scott Card", "242", false);
+  makeBook("Game of Thrones", "George R R Martin", "242", true);
+  updateBookLog();
+
 }
 
+function updateBookLog(){
+
+  var ul = document.getElementById("bookLogList");
+
+  while( ul.firstChild ){
+  ul.removeChild( ul.firstChild );
+  }
+
+  var bList = localStorage.getObj('books');
+
+	for (var i = 0; i < bList.length; i++) {
+
+      var li = document.createElement("li");
+      var name = bList[i].title;
+      var status = bList[i].pgNumber;
+      if(bList[i].finished){
+        status = "Done"
+      }
+      li.appendChild(document.createTextNode(name+": "+status));
+      ul.appendChild(li);
+		}
+
+
+
+}
 
 function openForm() {
 	document.getElementById("myForm").style.display = "block";
@@ -51,17 +81,10 @@ function submitLog() {
 		//UPDATE FOR SUMMARIES
 	}
 
-   updateLog();
+   updateBookLog();
 
-	
+   return false;
 
-}
-
-function updateLog(){
- var bList = localStorage.getObj('books');
- for (var i = 0; i < bList.length; i++){
-   console.log(bList[i]);
- }
 }
 
 
@@ -72,8 +95,6 @@ function makeBook(title, author, pgNumber, finished) {
 	book.pgNumber = pgNumber;
 	book.finished = finished;
 	var bList = localStorage.getObj('books');
-       bList.push(book);
+      bList.push(book);
 	localStorage.setObj('books', bList);
 }
-
-
