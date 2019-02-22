@@ -16,19 +16,20 @@ body {
 }
 
 .user_button {
-	width: 300px;
-	margin-left: 1350px;
+	float: right;
+	margin-right: 2%;
+	margin-top: 2%;
 }
 
-#logo {
-	width: 300px;
-	margin-right: 0px;
-}
 
 #logo img {
 	width: 300px;
 	height: 100px;
-	margin-bottom: 10px;
+	margin-bottom: 2%;
+}
+
+.nav.navbar-nav{
+	width: 100%
 }
 
 .material-icons.md-36 {
@@ -40,7 +41,7 @@ body {
 	padding-right: 5px;
 	width: 200px;
 	text-align: center;
-	width: 300px;
+	width: 20%;
 	font-weight: bold;
 }
 

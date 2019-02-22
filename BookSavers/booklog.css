@@ -28,7 +28,7 @@ label {
 
 #form-log {
  float: right;
- margin-right: 300px;
+ margin-right: 10%;
 }
 
 input {
@@ -88,7 +88,7 @@ button {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 650px;
+ margin-left: 30%;
  border-radius: 1em;
 }
 
