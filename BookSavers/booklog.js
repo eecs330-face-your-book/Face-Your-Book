@@ -10,8 +10,8 @@ function init() {
 	var books = [];
   localStorage.setObj('books', books);
 
-  makeBook("Ender's Game", "Orson Scott Card", "242", false);
-  makeBook("Game of Thrones", "George R R Martin", "242", true);
+  makeBook("Ender's Game", "Orson Scott Card", "242", true);
+  makeBook("Game of Thrones", "George R R Martin", "242", false);
   updateBookLog();
 
 }
@@ -26,7 +26,7 @@ function updateBookLog(){
 
   var bList = localStorage.getObj('books');
 
-	for (var i = 0; i < bList.length; i++) {
+	for (var i = (bList.length-1); i >= 0; i--) {
 
       var li = document.createElement("li");
       var name = bList[i].title;
