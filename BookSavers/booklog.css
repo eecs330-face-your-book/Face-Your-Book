@@ -22,8 +22,13 @@ form div + div {
 label {
   /* To make sure that all labels have the same size and are properly aligned */
   display: inline-block;
-  width: 138px;
+  width: 188px;
   text-align: left;
+}
+
+#check-label{
+	width: 145px;
+	font-size: 1.1em;
 }
 
 #form-log {
