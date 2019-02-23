@@ -22,13 +22,18 @@ form div + div {
 label {
   /* To make sure that all labels have the same size and are properly aligned */
   display: inline-block;
-  width: 138px;
+  width: 188px;
   text-align: left;
+}
+
+#check-label{
+	width: 145px;
+	font-size: 1.1em;
 }
 
 #form-log {
  float: right;
- margin-right: 300px;
+ margin-right: 10%;
 }
 
 input {
@@ -88,7 +93,8 @@ button {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 500px;
+ margin-left: 30%;
+
  border-radius: 1em;
 }
 
