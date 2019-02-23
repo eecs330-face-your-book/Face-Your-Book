@@ -12,6 +12,7 @@ function init() {
 
   makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false);
   makeBook("Game of Thrones", "George R R Martin", "242", "6", true);
+
   updateBookLog();
 
 }
@@ -26,7 +27,7 @@ function updateBookLog(){
 
   var bList = localStorage.getObj('books');
 
-	for (var i = 0; i < bList.length; i++) {
+	for (var i = (bList.length-1); i >= 0; i--) {
 
       var li = document.createElement("li");
       var name = bList[i].title;
