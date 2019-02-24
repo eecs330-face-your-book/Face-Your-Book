@@ -7,13 +7,15 @@ Storage.prototype.getObj = function(key) {
 }
 
 function init() {
-	var books = [];
+  var books = [];
   localStorage.setObj('books', books);
 
-  makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false);
-  makeBook("Game of Thrones", "George R R Martin", "242", "6", true);
-
+ 
+  makeBook("Game of Thrones", "George R R Martin", "242", "6", true, "test summary");
+  makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, "");
   updateBookLog();
+  
+  localStorage.setObj('sums', "");
 
 }
 
@@ -33,12 +35,22 @@ function updateBookLog(){
       var name = bList[i].title;
       var status = bList[i].pgNumber;
 	  var time = bList[i].timeSpent;
+	  var sumtext = bList[i].summary;
+	  var sum = document.createElement("div");
+	  sum.onclick = (function() {
+		  var curSum = i;
+		  return function (){
+			  displaySummary(curSum + '');
+		  }
+	  })();
+	  sum.appendChild(document.createTextNode("Click to view summary."));
       if(bList[i].finished){
         status = "Done"
       }else{
 		  status = "Page " + status;
 	  }
       li.appendChild(document.createTextNode(name+": "+status+", "+time+" hours"));
+	  li.appendChild(sum);
       ul.appendChild(li);
 		}
 
@@ -46,12 +58,33 @@ function updateBookLog(){
 
 }
 
+function displaySummary(ind){
+	var bList = localStorage.getObj('books');
+	var val = bList[ind].summary;
+	if(val == ""){
+		val = "No summary listed";
+	}
+	document.getElementById("sumdisplay-text").innerHTML = val;
+	document.getElementById("sum-display").style.display = "block";
+}
+
 function openForm() {
 	document.getElementById("myForm").style.display = "block";
 }
 
+function closeSummary() {
+	document.getElementById("sum-display").style.display = "none";
+}
+
 function closeForm() {
 	document.getElementById("myForm").style.display = "none";
+}
+
+function summarySubmit() {
+	closeForm()
+	var sumText = document.getElementById("summary-text").value;
+
+	localStorage.setObj('sums', sumText);
 }
 
 function submitLog() {
@@ -65,42 +98,54 @@ function submitLog() {
 		}
 
 	}
-
+	
+	var sums = localStorage.getObj('sums')
+    logForm.push(sums)
 	var existsFlag = false;
 	var bList = localStorage.getObj('books');
 
 	for (var i = 0; i < bList.length; i++) {
 		if (logForm[0] == bList[i].title) {
-			bList[i].pgNumber = logForm[2];
-			var ts = parseFloat(bList[i].timeSpent) + parseFloat(logForm[3])
-			bList[i].timeSpent = ts.toString();
+			if(logForm[2].length > 0){
+				bList[i].pgNumber = logForm[2];
+			}
+			if(logForm[3].length > 0){
+				var ts = parseFloat(bList[i].timeSpent) + parseFloat(logForm[3])
+				bList[i].timeSpent = ts.toString();
+			}
 			bList[i].finished = logForm[4];
+			if(bList[i].summary.length > 0){
+				bList[i].summary = bList[i].summary + "<br />" + logForm[5];
+			} else{
+				bList[i].summary = logForm[5];
+			}
 			existsFlag = true;
-			// ADD SUMMARIES
 		}
 	}
 
 	localStorage.setObj('books', bList);
 
 	if(!existsFlag){
-		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4]);
-		//UPDATE FOR SUMMARIES
+		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], logForm[5]);
 	}
 
    updateBookLog();
    document.getElementById("form-log").reset();
+   document.getElementById("summary-text").value = "";
+   localStorage.setObj('sums', "");
    return false;
 
 }
 
 
-function makeBook(title, author, pgNumber, timeSpent, finished) {
+function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
 	var book = new Object();
 	book.title = title;
 	book.author = author;
 	book.pgNumber = pgNumber;
 	book.finished = finished;
 	book.timeSpent = timeSpent;
+	book.summary = summary;
 	var bList = localStorage.getObj('books');
       bList.push(book);
 	localStorage.setObj('books', bList);
