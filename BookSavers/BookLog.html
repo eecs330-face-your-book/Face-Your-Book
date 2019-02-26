@@ -41,7 +41,11 @@
             </ul>
          </div>
       </nav>
-
+	  <div class="summary-display" id="sum-display">
+			<h1>Summary</h1>
+			<p id="sumdisplay-text">Default text</p>
+			<button id="closeSum" onclick="closeSummary()">Close</button>
+	  </div>
       <div class="bookLog">
 	<h1>Book Log</h1>
         <ul id="bookLogList">
@@ -80,15 +84,14 @@
          </form>
       </div>
       <div class="form-popup" id="myForm">
-         <form action="/action_page.php" class="form-container">
-            <h1>Login</h1>
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit" class="btn">Login</button>
-            <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+         <form class="form-container">
+            <h1>Please input a summary for what you most recently read:</h1>
+            <textarea name="summary" rows="10" cols="35" id="summary-text"></textarea>
+            <button type="button" class="btn" onclick="summarySubmit()">Done</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
          </form>
       </div>
+	  
+
    </body>
 </html>
