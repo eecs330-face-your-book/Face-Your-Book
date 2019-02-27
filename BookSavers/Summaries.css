@@ -51,6 +51,11 @@ input {
  color: black;
 }
 
+#form-log textarea{
+  background-color: #E7E3D4;
+  margin-bottom: 2%;
+}
+
 input:focus {
   /* To give a little highlight on active elements */
   border-color: #000;
