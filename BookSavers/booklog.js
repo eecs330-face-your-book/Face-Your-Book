@@ -39,13 +39,14 @@ function updateBookLog(){
       var status = bList[i].pgNumber;
 	  var time = bList[i].timeSpent;
 	  var sumtext = bList[i].summary;
-	  var sum = document.createElement("div");
+	  var sum = document.createElement("button");
 	  sum.onclick = (function() {
 		  var curSum = i;
 		  return function (){
 			  displaySummary(curSum + '');
 		  }
 	  })();
+	  sum.setAttribute("style", "margin-top: 2%; margin-bottom: 2%;");
 	  sum.appendChild(document.createTextNode("Click to view summary."));
       if(bList[i].finished){
         status = "Done"
@@ -54,7 +55,7 @@ function updateBookLog(){
 	  }
 		var TN = document.createElement('p');
 		TN.innerHTML = name+": "+status+", "+time+" hours";
-		TN.setAttribute("style", "margin-bottom: 0%; text-decoration: underline;");
+		TN.setAttribute("style", "margin-bottom: 0%; text-decoration: underline; cursor: pointer;");
 		TN.onclick = (function() {
 		   var curInd = i;
 		  return function (){
