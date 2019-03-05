@@ -42,9 +42,12 @@
          </div>
       </nav>
 	  <div class="summary-display" id="sum-display">
-			<h1>Summary</h1>
+		<form class="form-container">
+            <h1>Summary</h1>
 			<p id="sumdisplay-text">Default text</p>
 			<button id="closeSum" onclick="closeSummary()">Close</button>
+         </form>
+			
 	  </div>
       <div class="bookLog">
 	<h1>Book Log</h1>
@@ -56,13 +59,11 @@
          <form id="form-log">
             <fieldset>
                <legend>Add a Summary</legend>
+			   <p>Create a new summary for a book that is listed in the book log.</p>
                <div>
                   <label for="title">Title:</label>
-                  <input type="text" name="title">
-               </div>
-               <div>
-                  <label for="author">Author:</label>
-                  <input type="text" name="author">
+                  <select name="title" id="title-dropdown">
+				  </select>
                </div>
 				<div>
 					<label for="summary">Input summary:</label>
@@ -96,10 +97,12 @@
 					<label for="finished" id="check-label">Finished the Book?</label>
                   <input type="checkbox" name="finished" id="finish_new">
                </div>
+			<button type="button" onclick="updateSummary()">Add a Summary</button>
             <button type="button" class="btn" onclick="pgSubmit()">Done</button>
             <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
          </form>
       </div>
+	  
 	  
 
    </body>
