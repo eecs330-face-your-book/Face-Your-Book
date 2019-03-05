@@ -20,6 +20,22 @@ function init() {
   } 
 
 	updateBookLog();  
+	
+	loadDropdown();
+}
+
+
+function loadDropdown(){
+	var dd = document.getElementById("title-dropdown");
+	var bList = localStorage.getObj('books');
+	
+	for (var i = (bList.length-1); i >= 0; i--) {
+		var o = document.createElement("option");
+		o.setAttribute("value", bList[i].title);
+		o.innerHTML = bList[i].title;
+		dd.appendChild(o)
+	}
+	
 }
 
 function updateBookLog(){
@@ -92,6 +108,7 @@ function pgSubmit() {
 	var currPg = document.getElementById("curr_pg_new").value;
 	var newTime = document.getElementById("time_spent_new").value;
 	var fin = document.getElementById("finish_new").checked;
+	var sums = localStorage.getObj('sums')
 
 	var bList = localStorage.getObj('books');
 
@@ -101,11 +118,17 @@ function pgSubmit() {
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
+			if(bList[i].summary.length > 0){
+				bList[i].summary = bList[i].summary + "<br />" + sums;
+			} else{
+				bList[i].summary = sums;
+			}	
 		}
 	}
 	
 	localStorage.setObj('books', bList);
 	updateBookLog();
+	localStorage.setObj('sums', "");
 }
 
 function displaySummary(ind){
@@ -118,7 +141,7 @@ function displaySummary(ind){
 	document.getElementById("sum-display").style.display = "block";
 }
 
-function openForm() {
+function updateSummary() {
 	document.getElementById("myForm").style.display = "block";
 }
 
@@ -139,36 +162,25 @@ function summarySubmit() {
 
 function submitLog() {
 	var elem = document.getElementById("form-log").elements;
-	var logForm = [];
-	for (var i = 0, element; element = elem[i++];) {
-		if (element.name == "title" || element.name == "author") {
-			logForm.push(element.value);
-		}
-
-	}
+	var dd = document.getElementById("title-dropdown");
+	var name = dd.value;
 	
 	var sums = document.getElementById("add-summary-text").value;
-    logForm.push(sums);
-	var existsFlag = false;
 	var bList = localStorage.getObj('books');
 
 	for (var i = 0; i < bList.length; i++) {
-		if (logForm[0] == bList[i].title) {
+		if (name == bList[i].title) {
 			
 			if(bList[i].summary.length > 0){
-				bList[i].summary = bList[i].summary + "<br />" + logForm[2];
+				bList[i].summary = bList[i].summary + "<br />" + sums;
 			} else{
-				bList[i].summary = logForm[2];
+				bList[i].summary = sums;
 			}
-			existsFlag = true;
 		}
 	}
 
 	localStorage.setObj('books', bList);
 
-	if(!existsFlag){
-		alert("Please only enter summaries for books that exist");
-	}
 
    updateBookLog();
    document.getElementById("form-log").reset();

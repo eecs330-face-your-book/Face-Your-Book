@@ -90,6 +90,7 @@ function pgSubmit() {
 	var currPg = document.getElementById("curr_pg_new").value;
 	var newTime = document.getElementById("time_spent_new").value;
 	var fin = document.getElementById("finish_new").checked;
+	var sums = localStorage.getObj('sums')
 
 	var bList = localStorage.getObj('books');
 
@@ -99,11 +100,17 @@ function pgSubmit() {
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
+			if(bList[i].summary.length > 0){
+				bList[i].summary = bList[i].summary + "<br />" + sums;
+			} else{
+				bList[i].summary = sums;
+			}	
 		}
 	}
 	
 	localStorage.setObj('books', bList);
 	updateBookLog();
+	localStorage.setObj('sums', "");
 }
 
 function displaySummary(ind){

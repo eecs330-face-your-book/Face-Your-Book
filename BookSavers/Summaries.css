@@ -36,6 +36,15 @@ label {
  margin-right: 10%;
 }
 
+#form-log select{
+	background-color: #E7E3D4;
+	border: 1px solid #999;
+}
+
+#form-log option{
+	border: 1px solid black;
+}
+
 input {
   /* To make sure that all text fields have the same font settings
      By default, textareas have a monospace font */
@@ -157,17 +166,11 @@ button {
 }
 
 .summary-display{
-	z-index: 30;
-	border-radius: 1em;
-	border: 1px solid #000000;
-	background-color: #B23850;
-	width: 300px;
-	margin-left: 30%;
-	margin-top: 7%;
-	position: fixed;
-	display: none;
-
-	
+    display: none;
+  position: relative;
+  left: 30%;
+  top: 20%;
+  z-index: 9;
 	
 }
 
