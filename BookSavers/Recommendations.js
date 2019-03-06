@@ -1,4 +1,5 @@
 Storage.prototype.setObj = function(key, obj) {
+
   return this.setItem(key, JSON.stringify(obj))
 }
 Storage.prototype.getObj = function(key) {
@@ -34,12 +35,26 @@ function init() {
 
   updateOptions();
   updateBookLib();
+  loadDropdown();
 
 
 
 }
 
+
+function loadDropdown(){
+	var dd = document.getElementById("title-dropdown");
+	var bList = localStorage.getObj('books');
+	
+	for (var i = (bList.length-1); i >= 0; i--) {
+		var o = document.createElement("option");
+		o.setAttribute("value", bList[i].title);
+		o.innerHTML = bList[i].title;
+		dd.appendChild(o)
+	}
+	
 function updateOptions() {
+
 
   var ul = document.getElementById("reviewDropdown");
 
@@ -60,9 +75,11 @@ function updateOptions() {
 
   }
 
+
 }
 
 function updateBookLib() {
+
 
   var ul = document.getElementById("RecommendationsList");
 
@@ -187,39 +204,42 @@ function updateBookLib() {
 
 
 function displayPgUpdate(ind) {
-  var bList = localStorage.getObj('books');
-  var val = bList[ind].title;
-  document.getElementById("pg-title").innerHTML = val;
-  document.getElementById("update-pages").style.display = "block";
+
+    var bList = localStorage.getObj('books');
+    var val = bList[ind].title;
+    document.getElementById("pg-title").innerHTML = val;
+    document.getElementById("update-pages").style.display = "block";
 }
 
 function closepgForm() {
-  document.getElementById("update-pages").style.display = "none";
+    document.getElementById("update-pages").style.display = "none";
 }
 
 function pgSubmit() {
-  closepgForm();
-  var title = document.getElementById("pg-title").innerHTML;
-  var currPg = document.getElementById("curr_pg_new").value;
-  var newTime = document.getElementById("time_spent_new").value;
-  var fin = document.getElementById("finish_new").checked;
+    closepgForm();
+    var title =  document.getElementById("title-dropdown");
+    var currPg = document.getElementById("curr_pg_new").value;
+    var newTime = document.getElementById("time_spent_new").value;
+    var fin = document.getElementById("finish_new").checked;
 
-  var bList = localStorage.getObj('bookLib');
+    var bList = localStorage.getObj('bookLib');
 
-  for (var i = 0; i < bList.length; i++) {
-    if (title == bList[i].title) {
-      bList[i].pgNumber = currPg;
-      var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
-      bList[i].timeSpent = ts.toString();
+    for (var i = 0; i < bList.length; i++) {
+        if (title 
+            bList[i].title) {
+            bList[i].pgNumber = currPg;
+            var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
+            bList[i].timeSpent = ts.toString();
+        }
     }
-  }
 
-  localStorage.setObj('bookLib', bList);
-  updateBookLog();
+    localStorage.setObj('bookLib', bList);
+    updateBookLog();
 
 }
 
 function openForm() {
+
   document.getElementById("myForm").style.display = "block";
 }
 
@@ -286,6 +306,7 @@ function submitLog() {
 
 
 function makeBookForLib(title, author, rating, review, similarBooks) {
+
   var book = new Object();
   book.title = title;
   book.author = author;
@@ -310,3 +331,4 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
   bList.push(book);
   localStorage.setObj('books', bList);
 }
+
