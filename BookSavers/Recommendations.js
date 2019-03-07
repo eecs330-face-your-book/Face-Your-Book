@@ -97,7 +97,7 @@ function updateLibDropdown() {
 
 function takeAmazon(title){
 	var fp = "https://www.amazon.com/s?k=";
-	var end = "s&i=stripbooks"
+	var end = "&i=stripbooks"
 	var target = fp + title + end;
 	var win = window.open(target, '_blank');
 	win.focus();
@@ -182,6 +182,7 @@ function updateBookLib() {
 
 
 	if(numFound == 0){
+	  ul.setAttribute("style", "list-style-type: none;");
       var li = document.createElement("li");
 	  var TN = document.createElement('p');
       TN.innerHTML = "No similar books have been found. Please add a connection.";
@@ -192,6 +193,7 @@ function updateBookLib() {
 	  var sel = document.createElement("select");
 
 	  sel.setAttribute("id", "lib-list");
+
 	  li.appendChild(sel);
 	  ul.appendChild(li);  
 	  updateLibDropdown();
