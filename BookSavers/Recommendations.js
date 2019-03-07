@@ -24,12 +24,18 @@ function init() {
 
     var similarB = [];
 
-    makeBookForLib("Game of Thrones", "George R R Martin", "4", "Love it", ["Ender's Game", "Harry Potter", "Lord of the Rings"]);
-    makeBookForLib("Ender's Game", "Orson Scott Card", "5", "Best book ever", ["Game of Thrones"]);
-    makeBookForLib("Harry Potter", "J K Rowling", "3", "!!!!!!", ["Game of Thrones", "Lord of the Rings"]);
-    makeBookForLib("Lord of the Rings", "Tolkien", "5", "BEST BOOK EVR", ["Game of Thrones"]);
-    makeBookForLib("Ender's Shadow", "Orson Scott Card", "4", "Great if you love Ender's Game", ["Ender's Game", "Ender's Shadow"]);
+    makeBookForLib("Game of Thrones", "George R R Martin", "4", "Love it", ["Name of the Wind", "Harry Potter", "Lord of the Rings"]);
+    makeBookForLib("Ender's Game", "Orson Scott Card", "5", "Best book ever", ["Ender's Shadow", "Ender in Exile"]);
+    makeBookForLib("Harry Potter", "J K Rowling", "4", "!!!!!!", ["Game of Thrones", "Lord of the Rings", "Name of the Wind", "Cursed Child"]);
+    makeBookForLib("Cursed Child", "J K Rowling", "3", "Intersting delve into the Harry Potter mythos", ["Harry Potter"]);
+    makeBookForLib("Lord of the Rings", "Tolkien", "5", "B35T B00K 3VR", ["Game of Thrones", "Name of the Wind"]);
+    makeBookForLib("Name of the Wind", "Patrick Rothfuss", "5", "One of the greatest fantasy novels ever", ["Lord of the Rings", "Game of Thrones"]);
+    makeBookForLib("Ender's Shadow", "Orson Scott Card", "4", "Great if you love Ender's Game", ["Ender's Game", "Ender's Shadow", "So Long, and Thanks For All the Fish"]);
     makeBookForLib("Ender in Exile", "Orson Scott Card", "3", "Wonderful sequel, must read Ender's Game first", ["Ender's Game", "Ender's Shadow"]);
+    makeBookForLib("Notorious RBG", "RBG", "5", "Wonderful read", ["Bossypants"]);
+    makeBookForLib("Bossypants", "Tina Fey", "10", "Both witty and insightful", ["Notorious RBG"]);
+    makeBookForLib("The Resturant at the End of the Universe", "Douglas Adams", "4.2", "Intersting book, acts mostly as a bridge bettween the prequel and sequel", ["Ender's Game", "So Long, and Thanks For All the Fish"]);
+    makeBookForLib("So Long, and Thanks For All the Fish", "Douglas Adams", "4.2", "Funny and fascinating", ["Ender's Game", "The Resturant at the End of the Universe"]);
 
   }
 
@@ -43,7 +49,7 @@ function init() {
 function loadDropdown(){
 	var dd = document.getElementById("title-dropdown");
 	var bList = localStorage.getObj('books');
-	
+
 	for (var i = (bList.length-1); i >= 0; i--) {
 		var o = document.createElement("option");
 		o.setAttribute("value", bList[i].title);
@@ -51,7 +57,7 @@ function loadDropdown(){
 		dd.appendChild(o);
 	}
 }
-	
+
 function updateOptions() {
 
 
@@ -114,10 +120,10 @@ function subUpdateSim(title) {
 		  bList[i].similar = sim;
 	  }
   }
-  
+
   localStorage.setObj('bookLib', bList);
   updateBookLib();
-	
+
 }
 
 function updateBookLib() {
@@ -153,12 +159,12 @@ function updateBookLib() {
       var name = bList[i].title;
       var review = bList[i].review;
       var rating = bList[i].rating;
-	  
-	  
+
+
       var TN = document.createElement('p');
       TN.innerHTML = name + ": " + rating + "/5";
       TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
-	  
+
 	  TN.onclick = (function() {
 		  var title = name;
 		  return function (){
@@ -195,9 +201,9 @@ function updateBookLib() {
 	  sel.setAttribute("id", "lib-list");
 
 	  li.appendChild(sel);
-	  ul.appendChild(li);  
+	  ul.appendChild(li);
 	  updateLibDropdown();
-	  
+
 	  var li = document.createElement("li");
 	  var sub = document.createElement("button");
 	  sub.innerHTML = "Submit";
@@ -207,12 +213,12 @@ function updateBookLib() {
 			  subUpdateSim(name);
 		  }
 	  })();
-	  
+
 	  li.appendChild(sub);
-	  ul.appendChild(li);  
-	  
-	  
-	  
+	  ul.appendChild(li);
+
+
+
 	}
 
   // If not enough books are found
@@ -342,18 +348,18 @@ function submitLog() {
   var dl = document.getElementById("rating");
   var rating = dl[dl.selectedIndex].value;
 
-  
+
   var bList = localStorage.getObj('bookLib');
 
   for (var i = 0; i < bList.length; i++) {
 		if (title == bList[i].title) {
-			
+
 			if(bList[i].review.length > 0){
 				bList[i].review = bList[i].review + "<br />" + review;
 			} else{
 				bList[i].review = review;
 			}
-			
+
 			bList[i].rating = (parseFloat(bList[i].rating) + parseFloat(rating))/ 2.0;
 		}
 	}
@@ -379,7 +385,6 @@ function makeBookForLib(title, author, rating, review, similarBooks) {
   book.numReviews = 1;
   book.similar = similarBooks;
   var bList = localStorage.getObj('bookLib');
-  console.log(book);
   bList.push(book);
   localStorage.setObj('bookLib', bList);
 }
@@ -396,4 +401,3 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
   bList.push(book);
   localStorage.setObj('books', bList);
 }
-
