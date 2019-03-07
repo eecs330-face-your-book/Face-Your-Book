@@ -63,13 +63,26 @@
                <legend>Add a Review</legend>
                <div>
                   <label for="title">Title:</label>
+
                   <select name="title" id="title-dropdown">
 				  </select>
+
+                 
                </div>
                <div>
                   <label for="rating">Rating:</label>
-                  <input type="text" name="author">
+                  <select name="rating" id="rating">
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+				  </select>
                </div>
+			   <div>
+					<label for="review">Input review:</label>
+					<textarea name="review" rows="8" cols="48" id="add-review-text"></textarea>
+               <div>
                <div>
                   <button type="button" id="submit" onclick="submitLog()">Submit</button>
                </div>
