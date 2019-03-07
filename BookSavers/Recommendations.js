@@ -1,42 +1,41 @@
 Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
+
+  return this.setItem(key, JSON.stringify(obj))
 }
 Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
+  return JSON.parse(this.getItem(key))
 }
 
 function init() {
-    var books = [];
+  var books = [];
 
-    if (localStorage.getObj('books') === null) {
-        localStorage.setObj('books', books);
+  if (localStorage.getObj('books') === null) {
+    localStorage.setObj('books', books);
 
 
-        makeBook("Game of Thrones", "George R R Martin", "242", "6", true, "test summary");
-        makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, "");
+    makeBook("Game of Thrones", "George R R Martin", "242", "6", true, "test summary");
+    makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, "");
 
-        localStorage.setObj('sums', "");
-    }
+    localStorage.setObj('sums', "");
+  }
 
-    if (localStorage.getObj('bookLib') === null) {
-        localStorage.setObj('bookLib', books);
+  if (localStorage.getObj('bookLib') === null) {
+    localStorage.setObj('bookLib', books);
 
-        var similarB = [];
-        similarB.push("Ender's Game");
+    var similarB = [];
 
-        makeBookForLib("Game of Thrones", "George R R Martin", "4", "Love it", ["Game of Thrones", "Ender's Game"]);
-        similarB.push("Game of Thrones");
+    makeBookForLib("Game of Thrones", "George R R Martin", "4", "Love it", ["Ender's Game", "Harry Potter", "Lord of the Rings"]);
+    makeBookForLib("Ender's Game", "Orson Scott Card", "5", "Best book ever", ["Game of Thrones"]);
+    makeBookForLib("Harry Potter", "J K Rowling", "3", "!!!!!!", ["Game of Thrones", "Lord of the Rings"]);
+    makeBookForLib("Lord of the Rings", "Tolkien", "5", "BEST BOOK EVR", ["Game of Thrones"]);
+    makeBookForLib("Ender's Shadow", "Orson Scott Card", "4", "Great if you love Ender's Game", ["Ender's Game", "Ender's Shadow"]);
+    makeBookForLib("Ender in Exile", "Orson Scott Card", "3", "Wonderful sequel, must read Ender's Game first", ["Ender's Game", "Ender's Shadow"]);
 
-        makeBookForLib("Ender's Game", "Orson Scott Card", "5", "Best book ever", ["Game of Thrones"]);
-        makeBookForLib("Harry Potter", "J K Rowling", "3", " Meh", ["Game of Thrones"]);
+  }
 
-    }
-
-    updateOptions();
-    updateBookLib();
-
-	loadDropdown();
-
+  updateOptions();
+  updateBookLib();
+  loadDropdown();
 
 }
 
@@ -49,84 +48,235 @@ function loadDropdown(){
 		var o = document.createElement("option");
 		o.setAttribute("value", bList[i].title);
 		o.innerHTML = bList[i].title;
-		dd.appendChild(o)
+		dd.appendChild(o);
 	}
-	
 }
-
+	
 function updateOptions() {
 
-    var ul = document.getElementById("reviewDropdown");
 
-    while (ul.firstChild) {
-        ul.removeChild(ul.firstChild);
-    }
+  var ul = document.getElementById("reviewDropdown");
 
-    var bList = localStorage.getObj('books');
+  while (ul.firstChild) {
+    ul.removeChild(ul.firstChild);
+  }
 
-    for (var i = (bList.length - 1); i >= 0; i--) {
-        var name = bList[i].title;
+  var bList = localStorage.getObj('books');
 
-        var dropdown = document.getElementById("reviewDropdown");
-        var option = document.createElement("OPTION");
-        option.innerHTML = name;
-        option.value = name;
-        dropdown.options.add(option);
+  for (var i = (bList.length - 1); i >= 0; i--) {
+    var name = bList[i].title;
 
-    }
+    var dropdown = document.getElementById("reviewDropdown");
+    var option = document.createElement("OPTION");
+    option.innerHTML = name;
+    option.value = name;
+    dropdown.options.add(option);
 
+  }
+
+
+}
+
+function updateLibDropdown() {
+
+
+
+  var bList = localStorage.getObj('bookLib');
+  var dropdown = document.getElementById("lib-list");
+  for (var i = (bList.length - 1); i >= 0; i--) {
+    var name = bList[i].title;
+    var option = document.createElement("OPTION");
+    option.innerHTML = name;
+    option.value = name;
+    dropdown.appendChild(option);
+
+  }
+
+
+}
+
+function takeAmazon(title){
+	var fp = "https://www.amazon.com/s?k=";
+	var end = "s&i=stripbooks"
+	var target = fp + title + end;
+	var win = window.open(target, '_blank');
+	win.focus();
+}
+
+function subUpdateSim(title) {
+  var dl = document.getElementById("lib-list");
+  var selectedTitle = dl[dl.selectedIndex].value;
+  var bList = localStorage.getObj('bookLib');
+  for (var i = (bList.length - 1); i >= 0; i--) {
+	  if(bList[i].title == selectedTitle){
+		  var sim = bList[i].similar;
+		  sim.push(title);
+		  bList[i].similar = sim;
+	  }
+  }
+  
+  localStorage.setObj('bookLib', bList);
+  updateBookLib();
+	
 }
 
 function updateBookLib() {
 
-    var ul = document.getElementById("RecommendationsList");
 
-    while (ul.firstChild) {
-        ul.removeChild(ul.firstChild);
+  var ul = document.getElementById("RecommendationsList");
+
+  while (ul.firstChild) {
+    ul.removeChild(ul.firstChild);
+  }
+
+  var foundFlag = false;
+  var numFound = 0;
+  var foundArray = [];
+
+  var bList = localStorage.getObj('bookLib');
+
+  var selector = document.getElementById('reviewDropdown');
+  var selectedTitle = selector[selector.selectedIndex].value;
+
+  for (var i = (bList.length - 1); i >= 0; i--) {
+
+    var similarBooks = bList[i].similar;
+
+    if (similarBooks.includes(selectedTitle) && selectedTitle != bList[i].title) {
+
+      numFound = numFound + 1;
+      foundFlag = true;
+      foundArray.push(bList[i].title);
+
+
+      var li = document.createElement("li");
+      var name = bList[i].title;
+      var review = bList[i].review;
+      var rating = bList[i].rating;
+	  
+	  
+      var TN = document.createElement('p');
+      TN.innerHTML = name + ": " + rating + "/5";
+      TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
+	  
+	  TN.onclick = (function() {
+		  var title = name;
+		  return function (){
+			  takeAmazon(title);
+		  }
+	  })();
+
+
+
+      li.appendChild(TN);
+
+      var TN = document.createElement('p');
+      TN.innerHTML = review;
+      TN.setAttribute("style", "margin-bottom: 0%;");
+
+      li.appendChild(TN);
+      ul.appendChild(li);
+
     }
-
-    var bList = localStorage.getObj('bookLib');
-
-    var selector = document.getElementById('reviewDropdown');
-    var selectedTitle = selector[selector.selectedIndex].value;
-
-    for (var i = (bList.length - 1); i >= 0; i--) {
-
-        var similarBs = bList[i].similar;
-        console.log(similarBs);
-
-        if (similarBs.includes(selectedTitle)) {
-
-            var li = document.createElement("li");
-            var name = bList[i].title;
-            var review = bList[i].review;
-            var rating = bList[i].rating;
-            var sum = document.createElement("button");
-            sum.onclick = (function() {
-                var curSum = i;
-                return function() {
-                    displaySummary(curSum + '');
-                }
-            })();
-            sum.setAttribute("style", "margin-top: 2%; margin-bottom: 2%;");
-            sum.appendChild(document.createTextNode("Click to view summary."));
-
-            var TN = document.createElement('p');
-            TN.innerHTML = name + ": " + rating + "/5";
-            TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer;");
+  }
 
 
-            li.appendChild(TN);
+	if(numFound == 0){
+      var li = document.createElement("li");
+	  var TN = document.createElement('p');
+      TN.innerHTML = "No similar books have been found. Please add a connection.";
+      TN.setAttribute("style", "margin-bottom: 0%;");
+	  li.appendChild(TN);
+      ul.appendChild(li);
+	  var li = document.createElement("li");
+	  var sel = document.createElement("select");
 
-            var TN = document.createElement('p');
-            TN.innerHTML = review;
-            TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer;");
+	  sel.setAttribute("id", "lib-list");
+	  li.appendChild(sel);
+	  ul.appendChild(li);  
+	  updateLibDropdown();
+	  
+	  var li = document.createElement("li");
+	  var sub = document.createElement("button");
+	  sub.innerHTML = "Submit";
+	  sub.onclick = (function() {
+		  var name = selectedTitle;
+		  return function (){
+			  subUpdateSim(name);
+		  }
+	  })();
+	  
+	  li.appendChild(sub);
+	  ul.appendChild(li);  
+	  
+	  
+	  
+	}
 
-            li.appendChild(TN);
-            ul.appendChild(li);
+  // If not enough books are found
+
+  if (numFound < 4) {
+
+    for (var j = 0; j < foundArray.length; j++) {
+
+      for (var i = (bList.length - 1); i >= 0; i--) {
+
+        var similarBooks = bList[i].similar;
+
+        if (similarBooks.includes(foundArray[j]) && !foundArray.includes(bList[i].title) && selectedTitle != bList[i].title) {
+
+          numFound = numFound + 1;
+          foundFlag = true;
+          foundArray.push(bList[i].title);
+
+          var li = document.createElement("li");
+          var name = bList[i].title;
+          var review = bList[i].review;
+          var rating = bList[i].rating;
+          var sum = document.createElement("button");
+          sum.onclick = (function() {
+            var curSum = i;
+            return function() {
+              displaySummary(curSum + '');
+            }
+          })();
+          sum.setAttribute("style", "margin-top: 2%; margin-bottom: 2%;");
+          sum.appendChild(document.createTextNode("Click to view summary."));
+
+          var TN = document.createElement('p');
+          TN.innerHTML = name + ": " + rating + "/5";
+          TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
+		  TN.onclick = (function() {
+		  var title = name;
+		  return function (){
+			  takeAmazon(title);
+		  }
+	  })();
+
+          li.appendChild(TN);
+
+          var TN = document.createElement('p');
+          TN.innerHTML = review;
+          TN.setAttribute("style", "margin-bottom: 0%;");
+
+          li.appendChild(TN);
+          ul.appendChild(li);
 
         }
+
+        if (numFound >= 4) {
+          break;
+        }
+
+      }
+
+      if (numFound >= 4) {
+        break;
+      }
+
     }
+
+  }
 
 
 
@@ -134,6 +284,7 @@ function updateBookLib() {
 
 
 function displayPgUpdate(ind) {
+
     var bList = localStorage.getObj('books');
     var val = bList[ind].title;
     document.getElementById("pg-title").innerHTML = val;
@@ -167,92 +318,80 @@ function pgSubmit() {
 }
 
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
+
+  document.getElementById("myForm").style.display = "block";
 }
 
 function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+  document.getElementById("myForm").style.display = "none";
 }
 
 function summarySubmit() {
-    closeForm()
-    var sumText = document.getElementById("summary-text").value;
+  closeForm()
+  var sumText = document.getElementById("summary-text").value;
 
-    localStorage.setObj('sums', sumText);
+  localStorage.setObj('sums', sumText);
 }
 
 function submitLog() {
-    var elem = document.getElementById("form-log").elements;
-    var logForm = [];
-    for (var i = 0, element; element = elem[i++];) {
-        if (element.name == "title" || element.name == "author" || element.name == "curr_pg" || element.name == "time_spent") {
-            logForm.push(element.value);
-        } else if (element.name == "finished") {
-            logForm.push(element.checked);
-        }
+  var elem = document.getElementById("form-log").elements;
+  var title = document.getElementById("title-dropdown").value;
+  var review = document.getElementById("add-review-text").value;
+  var dl = document.getElementById("rating");
+  var rating = dl[dl.selectedIndex].value;
 
-    }
+  
+  var bList = localStorage.getObj('bookLib');
 
-    var sums = localStorage.getObj('sums')
-    logForm.push(sums)
-    var existsFlag = false;
-    var bList = localStorage.getObj('books');
+  for (var i = 0; i < bList.length; i++) {
+		if (title == bList[i].title) {
+			
+			if(bList[i].review.length > 0){
+				bList[i].review = bList[i].review + "<br />" + review;
+			} else{
+				bList[i].review = review;
+			}
+			
+			bList[i].rating = (parseFloat(bList[i].rating) + parseFloat(rating))/ 2.0;
+		}
+	}
 
-    for (var i = 0; i < bList.length; i++) {
-        if (logForm[0] == bList[i].title) {
-            if (logForm[2].length > 0) {
-                bList[i].pgNumber = logForm[2];
-            }
-            if (logForm[3].length > 0) {
-                var ts = parseFloat(bList[i].timeSpent) + parseFloat(logForm[3])
-                bList[i].timeSpent = ts.toString();
-            }
-            bList[i].finished = logForm[4];
-            if (bList[i].summary.length > 0) {
-                bList[i].summary = bList[i].summary + "<br />" + logForm[5];
-            } else {
-                bList[i].summary = logForm[5];
-            }
-            existsFlag = true;
-        }
-    }
+  localStorage.setObj('bookLib', bList);
 
-    localStorage.setObj('books', bList);
 
-    if (!existsFlag) {
-        makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], logForm[5]);
-    }
-
-    updateBookLog();
-    document.getElementById("form-log").reset();
-    document.getElementById("summary-text").value = "";
-    localStorage.setObj('sums', "");
-    return false;
+  updateBookLib();
+  document.getElementById("form-log").reset();
+  document.getElementById("add-review-text").value = "";
+  return false;
 
 }
 
 
 function makeBookForLib(title, author, rating, review, similarBooks) {
-    var book = new Object();
-    book.title = title;
-    book.author = author;
-    book.rating = rating;
-    book.review = review;
-    book.similar = similarBooks;
-    var bList = localStorage.getObj('bookLib');
-    bList.push(book);
-    localStorage.setObj('bookLib', bList);
+
+  var book = new Object();
+  book.title = title;
+  book.author = author;
+  book.rating = rating;
+  book.review = review;
+  book.numReviews = 1;
+  book.similar = similarBooks;
+  var bList = localStorage.getObj('bookLib');
+  console.log(book);
+  bList.push(book);
+  localStorage.setObj('bookLib', bList);
 }
 
 function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
-    var book = new Object();
-    book.title = title;
-    book.author = author;
-    book.pgNumber = pgNumber;
-    book.finished = finished;
-    book.timeSpent = timeSpent;
-    book.summary = summary;
-    var bList = localStorage.getObj('books');
-    bList.push(book);
-    localStorage.setObj('books', bList);
+  var book = new Object();
+  book.title = title;
+  book.author = author;
+  book.pgNumber = pgNumber;
+  book.finished = finished;
+  book.timeSpent = timeSpent;
+  book.summary = summary;
+  var bList = localStorage.getObj('books');
+  bList.push(book);
+  localStorage.setObj('books', bList);
 }
+
