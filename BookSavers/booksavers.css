@@ -6,17 +6,15 @@ body {
 	background-color: #B23850;
 }
 
-.header {
-	width: 100%;
-}
 
-#logo {
-	width: 300px;
+
+/*logo {
+	width: 160px;
 	display: inline-block;
 }
+*/
 
 .user_button {
-	float: right;
 	margin-right: 7%;
 	margin-top: 2%;
 }
@@ -24,8 +22,8 @@ body {
 
 
 #logo img {
-	width: 300px;
-	height: 100px;
+	width: 210px;
+	height: 70px;
 	margin-bottom: 2%;
 }
 
@@ -33,17 +31,20 @@ body {
 	width: 100%
 }
 
+
 .material-icons.md-36 {
 	font-size: 36px;
 }
 
-.nav.navbar-nav li {
-	padding-left: 5px;
-	padding-right: 5px;
-	width: 200px;
+.nav.navbar-nav li a{
+
 	text-align: center;
-	width: 20%;
 	font-weight: bold;
+}
+.nav.navbar-nav li{
+
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .navbar-default .navbar-nav>li>a {

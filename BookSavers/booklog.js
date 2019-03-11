@@ -11,9 +11,9 @@ function init() {
   if(localStorage.getObj('books') === null){
 	localStorage.setObj('books', books);
 
- 
-	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, "test summary");
-	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, ""); 
+	
+	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
+	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []); 
 	
 	localStorage.setObj('sums', "");
   } 
@@ -100,11 +100,7 @@ function pgSubmit() {
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
-			if(bList[i].summary.length > 0){
-				bList[i].summary = bList[i].summary + "<br />" + sums;
-			} else{
-				bList[i].summary = sums;
-			}	
+			bList[i].summary.push(sums)
 		}
 	}
 	
@@ -116,10 +112,16 @@ function pgSubmit() {
 function displaySummary(ind){
 	var bList = localStorage.getObj('books');
 	var val = bList[ind].summary;
-	if(val == ""){
-		val = "No summary listed";
+	var sums = "";
+	if(val.length == 0){
+		sums = "No summary listed";
+	}else{
+		for(var i=0; i < val.length; i++){
+			sums += val[i];
+			sums += "</br>";
+		}
 	}
-	document.getElementById("sumdisplay-text").innerHTML = val;
+	document.getElementById("sumdisplay-text").innerHTML = sums;
 	document.getElementById("sum-display").style.display = "block";
 }
 
@@ -169,19 +171,17 @@ function submitLog() {
 				bList[i].timeSpent = ts.toString();
 			}
 			bList[i].finished = logForm[4];
-			if(bList[i].summary.length > 0){
-				bList[i].summary = bList[i].summary + "<br />" + logForm[5];
-			} else{
-				bList[i].summary = logForm[5];
-			}
+			bList[i].summary.push(logForm[5]);
 			existsFlag = true;
 		}
 	}
 
 	localStorage.setObj('books', bList);
 
+	var sumArr = [];
+	sumArr.push(logForm[5]);
 	if(!existsFlag){
-		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], logForm[5]);
+		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], sumArr);
 	}
 
    updateBookLog();
