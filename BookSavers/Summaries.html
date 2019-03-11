@@ -10,12 +10,19 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="summaries.js"></script>
-      <div class="header">
-         <div id = "logo">
-            <img src="images/logo3.png">
-         </div>
-
-            <div class="user_button">
+      
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <ul class="nav navbar-nav">
+				<li><div id = "logo">
+            <img src="images/logo5.png">
+         </div></li>
+               <li><a href="#">Dashboard</a></li>
+               <li><a href="BookLog.html">Book Log</a></li>
+               <li class="active"><a href="Summaries.html">Summaries</a></li>
+               <li><a href="Recommendations.html">Find a New Book</a></li>
+               <li><a href="#">MyRewards</a></li>
+			   <li><div class="user_button">
                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
                   <span class="caret"></span></button>
@@ -27,17 +34,7 @@
                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
                   </ul>
                </div>
-            </div>
-
-      </div>
-      <nav class="navbar navbar-default">
-         <div class="container-fluid">
-            <ul class="nav navbar-nav">
-               <li><a href="#">Dashboard</a></li>
-               <li><a href="BookLog.html">Book Log</a></li>
-               <li class="active"><a href="Summaries.html">Summaries</a></li>
-               <li><a href="Recommendations.html">Find a New Book</a></li>
-               <li><a href="#">MyRewards</a></li>
+            </div></li>
             </ul>
          </div>
       </nav>
