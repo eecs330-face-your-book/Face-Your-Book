@@ -100,7 +100,7 @@ function pgSubmit() {
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
-			bList[i].summary.push(sums)
+			bList[i].summary.push(sums);
 		}
 	}
 	
