@@ -1,0 +1,67 @@
+<html>
+   <head>
+      <title>Book Log</title>
+   </head>
+   <body onload="init()">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="booksavers.css">
+      <link rel="stylesheet" href="rewards.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="rewards.js"></script>
+      <div class="header">
+         <div id = "logo">
+            <img src="images/logo3.png">
+         </div>
+
+            <div class="user_button">
+               <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Account Settings</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                  </ul>
+               </div>
+            </div>
+
+      </div>
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <ul class="nav navbar-nav">
+               <li><a href="#">Dashboard</a></li>
+               <li><a href="BookLog.html">Book Log</a></li>
+               <li><a href="Summaries.html">Summaries</a></li>
+               <li><a href="Recommendations.html">Find a New Book</a></li>
+               <li class="active"><a href="rewards.html">MyRewards</a></li>
+            </ul>
+         </div>
+      </nav>
+	  <div class="summary-display" id="sum-display">
+			<h1>Summary</h1>
+			<p id="sumdisplay-text">Default text</p>
+			<button id="closeSum" onclick="closeSummary()">Close</button>
+	  </div>
+    <div class="bookLog">
+<h1>My Rewards</h1>
+      <ul id="rewardsHist">
+
+      </ul>
+    </div>
+    <div class="bookLog">
+      <h1>My Badges</h1>
+      <ul id="badgeHist">
+
+      </ul>
+    </div>
+
+    <div class="streakBar">
+      Streak of 42 days
+    </div>
+
+   </body>
+</html>

@@ -13,82 +13,134 @@ function init() {
   if(localStorage.getObj('books') === null){
 	localStorage.setObj('books', books);
 
-	
-	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
-	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []); 
-	
+	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, "test summary");
+	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, "");
 
 	localStorage.setObj('sums', "");
+
   }
-  updateBookLog();
+
+  if(localStorage.getObj('badges') === null){
+	localStorage.setObj('badges', badges);
+
+	makeBadge("Sci-Fi Novice", 20, "Read three sci-fi novels.", 100);
+	makeBadge("Sci-Fi Savant", 100, "Read ten sci-fi novels.", 20);
+
+  }
 
   if(localStorage.getObj('pointHist') === null){
-	   localStorage.setObj('pointHist', badges);
-     localStorage.setObj('user', badges);
+	localStorage.setObj('pointHist', badges);
+  localStorage.setObj('user', badges);
 
-     createUser("FILL_ME_IN", 4, 0);
+  createUser("FILL_ME_IN", 4, 0);
 
-     addPoints("Read 25 pages", 20);
-	   addPoints("Start a new book", 25);
-     addPoints("3-day streak", 10);
-
-  }
-
-  if(localStorage.getObj('history') === null){
-    localStorage.setObj('history', badges);
-
-    addPastData("Ender's Game", 2, 25, 17, 2, 2019);
-    addPastData("Ender's Game", 2, 50, 22, 2, 2019);
+  addPoints("Read 25 pages", 20);
+	addPoints("Start a new book", 25);
+  addPoints("3-day streak", 10);
 
   }
+
+  updateBadges();
+  updateRewardsTable();
 
 }
 
-function updateBookLog(){
+function updateBadges(){
 
-  var ul = document.getElementById("bookLogList");
+  var ul = document.getElementById("badgeHist");
 
   while( ul.firstChild ){
   ul.removeChild( ul.firstChild );
   }
 
-  var bList = localStorage.getObj('books');
+  var bList = localStorage.getObj('badges');
+
+	for (var i = 0; i < bList.length; i++) {
+
+      var li = document.createElement("li");
+      var name = bList[i].name;
+      var points = bList[i].points;
+      var progress = bList[i].progress;
+      var descrip = bList[i].descrip;
+
+		  var TN = document.createElement('p');
+		  TN.innerHTML = name+": "+progress;
+		  TN.setAttribute("style", "margin-bottom: 0%;");
+
+      li.appendChild(TN);
+
+      var TN = document.createElement('p');
+		  TN.innerHTML = descrip + " Worth " + points + " points.";
+		  TN.setAttribute("style", "margin-bottom: 0%;");
+
+      li.appendChild(TN);
+
+      ul.appendChild(li);
+		}
+
+
+
+}
+
+function updateRewardsTable(){
+
+  var ul = document.getElementById("rewardsHist");
+
+  while( ul.firstChild ){
+  ul.removeChild( ul.firstChild );
+  }
+
+  var user = localStorage.getObj('user');
+
+  var name = user[0].name;
+  var lvl = user[0].lvl;
+  var points = user[0].points;
+  var li = document.createElement("li");
+
+  var TN = document.createElement('p');
+  TN.innerHTML = name+": Level "+lvl;
+  TN.setAttribute("style", "margin-bottom: 0%;");
+
+  li.appendChild(TN);
+
+  var TN = document.createElement('p');
+  TN.innerHTML = points +"/100";
+  TN.setAttribute("style", "margin-bottom: 0%;");
+
+  li.appendChild(TN);
+
+  var TN = document.createElement('p');
+  TN.innerHTML = "Recent Points Earned:";
+  TN.setAttribute("style", "margin-bottom: 0%;");
+
+  li.appendChild(TN);
+
+  ul.appendChild(li);
+
+  var bList = localStorage.getObj('pointHist');
+
+  var count = 0;
 
 	for (var i = (bList.length-1); i >= 0; i--) {
 
       var li = document.createElement("li");
-      var name = bList[i].title;
+      var name = bList[i].name;
+      var points = bList[i].points;
 
-      var status = bList[i].pgNumber;
-	  var time = bList[i].timeSpent;
-	  var sumtext = bList[i].summary;
-	  var sum = document.createElement("button");
-	  sum.onclick = (function() {
-		  var curSum = i;
-		  return function (){
-			  displaySummary(curSum + '');
-		  }
-	  })();
-	  sum.setAttribute("style", "margin-top: 2%; margin-bottom: 2%;");
-	  sum.appendChild(document.createTextNode("Click to view summary."));
-      if(bList[i].finished){
-        status = "Done"
-      }else{
-		  status = "Page " + status;
-	  }
-		var TN = document.createElement('p');
-		TN.innerHTML = name+": "+status+", "+time+" hours";
-		TN.setAttribute("style", "margin-bottom: 0%; text-decoration: underline; cursor: pointer;");
-		TN.onclick = (function() {
-		   var curInd = i;
-		  return function (){
-			  displayPgUpdate(curInd + '');
-		  }
-	  })();
+		  var TN = document.createElement('p');
+		  TN.innerHTML = name+": +"+points;
+		  TN.setAttribute("style", "margin-bottom: 0%;");
 
       li.appendChild(TN);
-	    li.appendChild(sum);
+
       ul.appendChild(li);
+
+      count++;
+
+      if(count >= 5){
+        break;
+      }
+
 		}
 
 
@@ -116,26 +168,20 @@ function pgSubmit() {
 	var sums = localStorage.getObj('sums')
 
 	var bList = localStorage.getObj('books');
-  var newPages = 0;
 
 	for (var i = 0; i < bList.length; i++) {
 		if (title == bList[i].title) {
-      newPages = currPg - bList[i].pgNumber;
 			bList[i].pgNumber = currPg;
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
-
-			bList[i].summary.push(sums);
-
+			if(bList[i].summary.length > 0){
+				bList[i].summary = bList[i].summary + "<br />" + sums;
+			} else{
+				bList[i].summary = sums;
+			}
 		}
 	}
-
-  var msg = "Read " + newPages + " pages";
-  addPoints(msg, 20);
-  addData(logForm[0], newPages, logForm[3]);
-  msg = msg + " +20"
-  popupReward(msg);
 
 	localStorage.setObj('books', bList);
 	updateBookLog();
@@ -145,16 +191,10 @@ function pgSubmit() {
 function displaySummary(ind){
 	var bList = localStorage.getObj('books');
 	var val = bList[ind].summary;
-	var sums = "";
-	if(val.length == 0){
-		sums = "No summary listed";
-	}else{
-		for(var i=0; i < val.length; i++){
-			sums += val[i];
-			sums += "</br>";
-		}
+	if(val == ""){
+		val = "No summary listed";
 	}
-	document.getElementById("sumdisplay-text").innerHTML = sums;
+	document.getElementById("sumdisplay-text").innerHTML = val;
 	document.getElementById("sum-display").style.display = "block";
 }
 
@@ -194,49 +234,30 @@ function submitLog() {
 	var existsFlag = false;
 	var bList = localStorage.getObj('books');
 
-  var newPages = 0;
-
 	for (var i = 0; i < bList.length; i++) {
 		if (logForm[0] == bList[i].title) {
 			if(logForm[2].length > 0){
-        newPages = logForm[2] - bList[i].pgNumber;
 				bList[i].pgNumber = logForm[2];
 			}
 			if(logForm[3].length > 0){
 				var ts = parseFloat(bList[i].timeSpent) + parseFloat(logForm[3])
 				bList[i].timeSpent = ts.toString();
 			}
-
 			bList[i].finished = logForm[4];
-			bList[i].summary.push(logForm[5]);
+			if(bList[i].summary.length > 0){
+				bList[i].summary = bList[i].summary + "<br />" + logForm[5];
+			} else{
+				bList[i].summary = logForm[5];
+			}
 			existsFlag = true;
 		}
 	}
 
 	localStorage.setObj('books', bList);
 
-	var sumArr = [];
-	sumArr.push(logForm[5]);
 	if(!existsFlag){
-    
-		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], sumArr);
-
-    newPages = logForm[2];
-
-    var msgNew = "Started new book";
-    addPoints(msgNew, 25);
-    msgNew = msgNew + " +25"
-    popupReward(msgNew);
-
-
+		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], logForm[5]);
 	}
-
-
-  var msg = "Read " + newPages + " pages";
-  addPoints(msg, 20);
-  addData(logForm[0], newPages, logForm[3]);
-  msg = msg + " +20"
-  popupReward(msg);
 
    updateBookLog();
    document.getElementById("form-log").reset();
@@ -245,6 +266,7 @@ function submitLog() {
    return false;
 
 }
+
 
 function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
 	var book = new Object();
@@ -287,42 +309,7 @@ function addPoints(name, points) {
     user[0].lvl = user[0].lvl + 1;
     popupReward("LEVEL UP");
   }
-  localStorage.setObj('user', user);
-}
-
-function addPastData(book, time, pages, day, week, year) {
-	var dataPoint = new Object();
-	dataPoint.book = book;
-	dataPoint.time = time;
-  dataPoint.pages = pages;
-  dataPoint.day = day;
-	dataPoint.week = week;
-  dataPoint.year = year;
-
-	var dataList = localStorage.getObj('history');
-      dataList.push(dataPoint);
-	localStorage.setObj('history', dataList);
-
-}
-
-function addData(book, time, pages) {
-	var dataPoint = new Object();
-	dataPoint.book = book;
-	dataPoint.time = time;
-  dataPoint.pages = pages;
-
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
-  dataPoint.day = dd;
-	dataPoint.week = mm;
-  dataPoint.year = yyyy;
-
-	var dataList = localStorage.getObj('history');
-      dataList.push(dataPoint);
-	localStorage.setObj('history', dataList);
-
+  localStorage.setObj('user', user)
 }
 
 function createUser(name, lvl, points) {
@@ -334,20 +321,4 @@ function createUser(name, lvl, points) {
 	var userList = localStorage.getObj('user');
       userList.push(user);
 	localStorage.setObj('user', userList);
-}
-
-function popupReward(msg) {
-  var popupList = document.getElementById("popupList");
-  var popup = document.createElement("span");
-  popup.setAttribute("class", "popuptext");
-  popup.innerHTML = msg;
-  popup.classList.toggle("show");
-  popup.onclick = (function() {
-    var popupElement = popup;
-    return function (){
-      popupElement.parentNode.removeChild(popupElement);
-    }
-  })();
-  popupList.appendChild(popup);
-
 }
