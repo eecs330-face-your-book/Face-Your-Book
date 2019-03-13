@@ -23,6 +23,8 @@ function init() {
 	updateBookLog();
 
 	loadDropdown();
+	loadDropdown2();
+	viewSummaries();
 }
 
 
@@ -36,6 +38,42 @@ function loadDropdown(){
 		o.innerHTML = bList[i].title;
 		dd.appendChild(o)
 	}
+
+}
+
+function viewSummaries(){
+	var bList = localStorage.getObj('books');
+	var title = document.getElementById("title-dropdown-2").value;
+	var sumArea = document.getElementById("last-summary-text");
+
+	for (var i = 0; i < bList.length; i++) {
+		if (title == bList[i].title) {
+			var val = bList[i].summary;
+			var sums = "";
+			if(val.length == 0){
+				sums = "No summary listed";
+			}else{
+				for(var i=0; i < val.length; i++){
+					sums += val[i];
+					sums += "\n";
+				}
+			}
+			sumArea.innerHTML = sums;
+		}
+	}
+}
+
+function loadDropdown2(){
+	var dd = document.getElementById("title-dropdown-2");
+	var bList = localStorage.getObj('books');
+	
+	for (var i = (bList.length-1); i >= 0; i--) {
+		var o = document.createElement("option");
+		o.setAttribute("value", bList[i].title);
+		o.innerHTML = bList[i].title;
+		dd.appendChild(o)
+	}
+	
 
 }
 
@@ -187,6 +225,7 @@ function submitLog() {
    updateBookLog();
    document.getElementById("form-log").reset();
    localStorage.setObj('sums', "");
+   viewSummaries();
    return false;
 
 }
