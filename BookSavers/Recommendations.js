@@ -149,7 +149,7 @@ function updateBookLib() {
     var similarBooks = bList[i].similar;
 
     if (similarBooks.includes(selectedTitle) && selectedTitle != bList[i].title) {
-
+	  ul.setAttribute("style", "list-style-type: none;");
       numFound = numFound + 1;
       foundFlag = true;
       foundArray.push(bList[i].title);
@@ -162,7 +162,11 @@ function updateBookLib() {
 
 
       var TN = document.createElement('p');
+	  var icon = document.createElement('i');
+	  icon.setAttribute("class", "material-icons md-6");
+	  icon.innerHTML = "shopping_cart";
       TN.innerHTML = name + ": " + rating + "/5";
+	  TN.appendChild(icon);
       TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
 
 	  TN.onclick = (function() {
@@ -224,7 +228,7 @@ function updateBookLib() {
   // If not enough books are found
 
   if (numFound < 4) {
-
+	ul.setAttribute("style", "list-style-type: none;");
     for (var j = 0; j < foundArray.length; j++) {
 
       for (var i = (bList.length - 1); i >= 0; i--) {
