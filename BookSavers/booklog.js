@@ -131,11 +131,13 @@ function pgSubmit() {
 		}
 	}
 
-  var msg = "Read " + newPages + " pages";
-  addPoints(msg, 20);
-  addData(logForm[0], newPages, logForm[3]);
-  msg = msg + " +20"
-  popupReward(msg);
+  if(logForm[5].length > 0){
+    var msg = "Added a summary";
+    addPoints(msg, 5);
+    msg = msg + " +5"
+    popupReward(msg);
+  }
+
 
 	localStorage.setObj('books', bList);
 	updateBookLog();
@@ -208,7 +210,9 @@ function submitLog() {
 			}
 
 			bList[i].finished = logForm[4];
+
 			bList[i].summary.push(logForm[5]);
+
 			existsFlag = true;
 		}
 	}
@@ -223,13 +227,20 @@ function submitLog() {
 
     newPages = logForm[2];
 
-    var msgNew = "Started new book";
-    addPoints(msgNew, 25);
-    msgNew = msgNew + " +25"
-    popupReward(msgNew);
+    var msg = "Started new book";
+    addPoints(msg, 25);
+    msg = msg + " +25"
+    popupReward(msg);
 
 
 	}
+
+  if(logForm[5].length > 0){
+    var msg = "Added a summary";
+    addPoints(msg, 5);
+    msg = msg + " +5"
+    popupReward(msg);
+  }
 
 
   var msg = "Read " + newPages + " pages";
