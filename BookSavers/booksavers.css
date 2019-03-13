@@ -22,8 +22,8 @@ body {
 
 
 #logo img {
-	width: 150px;
-	height: 50px;
+	width: 99.05px;
+	height: 65.65px;
 	margin-bottom: 2%;
 }
 
@@ -40,21 +40,34 @@ body {
 
 	text-align: center;
 	font-weight: bold;
+	font-size: 16.8px;
+	height: 68px;
 }
 .nav.navbar-nav li{
 
-	padding-left: 2%;
-	padding-right: 2%;
+	padding-left: 2.4%;
+	padding-right: 2.4%;
 }
 
 .navbar-default .navbar-nav>li>a {
 	color: #E7E3D4;
 }
 
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+	background-color: #E7E3D4;;
+}
+
 .active {
 	background-color: #E7E3D4;
 
 }
+
+.dropdown-menu {
+	left: -98;
+	background-color: #C4DBF6;
+}
+
 
 
 
