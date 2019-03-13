@@ -22,14 +22,22 @@ function init() {
   updateBookLog();
 
   if(localStorage.getObj('pointHist') === null){
-	localStorage.setObj('pointHist', badges);
-  localStorage.setObj('user', badges);
+	   localStorage.setObj('pointHist', badges);
+     localStorage.setObj('user', badges);
 
-  createUser("FILL_ME_IN", 4, 0);
+     createUser("FILL_ME_IN", 4, 0);
 
-  addPoints("Read 25 pages", 20);
-	addPoints("Start a new book", 25);
-  addPoints("3-day streak", 10);
+     addPoints("Read 25 pages", 20);
+	   addPoints("Start a new book", 25);
+     addPoints("3-day streak", 10);
+
+  }
+
+  if(localStorage.getObj('history') === null){
+    localStorage.setObj('history', badges);
+
+    addPastData("Ender's Game", 2, 25, 17, 2, 2019);
+    addPastData("Ender's Game", 2, 50, 22, 2, 2019);
 
   }
 
@@ -78,7 +86,7 @@ function updateBookLog(){
 	  })();
 
       li.appendChild(TN);
-	  li.appendChild(sum);
+	    li.appendChild(sum);
       ul.appendChild(li);
 		}
 
@@ -107,9 +115,11 @@ function pgSubmit() {
 	var sums = localStorage.getObj('sums')
 
 	var bList = localStorage.getObj('books');
+  var newPages = 0;
 
 	for (var i = 0; i < bList.length; i++) {
 		if (title == bList[i].title) {
+      newPages = currPg - bList[i].pgNumber;
 			bList[i].pgNumber = currPg;
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
@@ -121,6 +131,12 @@ function pgSubmit() {
 			}
 		}
 	}
+
+  var msg = "Read " + newPages + " pages";
+  addPoints(msg, 20);
+  addData(logForm[0], newPages, logForm[3]);
+  msg = msg + " +20"
+  popupReward(msg);
 
 	localStorage.setObj('books', bList);
 	updateBookLog();
@@ -173,9 +189,12 @@ function submitLog() {
 	var existsFlag = false;
 	var bList = localStorage.getObj('books');
 
+  var newPages = 0;
+
 	for (var i = 0; i < bList.length; i++) {
 		if (logForm[0] == bList[i].title) {
 			if(logForm[2].length > 0){
+        newPages = logForm[2] - bList[i].pgNumber;
 				bList[i].pgNumber = logForm[2];
 			}
 			if(logForm[3].length > 0){
@@ -197,11 +216,20 @@ function submitLog() {
 
 	if(!existsFlag){
 		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], logForm[5]);
+
+    newPages = logForm[2];
+
+    var msgNew = "Started new book";
+    addPoints(msgNew, 25);
+    msgNew = msgNew + " +25"
+    popupReward(msgNew);
+
 	}
 
-  var msg = logForm[3];
-  msg = "Read for " + msg + " hours";
+
+  var msg = "Read " + newPages + " pages";
   addPoints(msg, 20);
+  addData(logForm[0], newPages, logForm[3]);
   msg = msg + " +20"
   popupReward(msg);
 
@@ -212,7 +240,6 @@ function submitLog() {
    return false;
 
 }
-
 
 function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
 	var book = new Object();
@@ -255,7 +282,42 @@ function addPoints(name, points) {
     user[0].lvl = user[0].lvl + 1;
     popupReward("LEVEL UP");
   }
-  localStorage.setObj('user', user)
+  localStorage.setObj('user', user);
+}
+
+function addPastData(book, time, pages, day, week, year) {
+	var dataPoint = new Object();
+	dataPoint.book = book;
+	dataPoint.time = time;
+  dataPoint.pages = pages;
+  dataPoint.day = day;
+	dataPoint.week = week;
+  dataPoint.year = year;
+
+	var dataList = localStorage.getObj('history');
+      dataList.push(dataPoint);
+	localStorage.setObj('history', dataList);
+
+}
+
+function addData(book, time, pages) {
+	var dataPoint = new Object();
+	dataPoint.book = book;
+	dataPoint.time = time;
+  dataPoint.pages = pages;
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear();
+  dataPoint.day = dd;
+	dataPoint.week = mm;
+  dataPoint.year = yyyy;
+
+	var dataList = localStorage.getObj('history');
+      dataList.push(dataPoint);
+	localStorage.setObj('history', dataList);
+
 }
 
 function createUser(name, lvl, points) {
@@ -270,7 +332,17 @@ function createUser(name, lvl, points) {
 }
 
 function popupReward(msg) {
-  var popup = document.getElementById("myPopup");
+  var popupList = document.getElementById("popupList");
+  var popup = document.createElement("span");
+  popup.setAttribute("class", "popuptext");
   popup.innerHTML = msg;
   popup.classList.toggle("show");
+  popup.onclick = (function() {
+    var popupElement = popup;
+    return function (){
+      popupElement.parentNode.removeChild(popupElement);
+    }
+  })();
+  popupList.appendChild(popup);
+
 }

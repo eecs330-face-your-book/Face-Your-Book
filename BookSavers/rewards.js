@@ -110,7 +110,7 @@ function updateRewardsTable(){
   li.appendChild(TN);
 
   var TN = document.createElement('p');
-  TN.innerHTML = " ";
+  TN.innerHTML = "Recent Points Earned:";
   TN.setAttribute("style", "margin-bottom: 0%;");
 
   li.appendChild(TN);
@@ -118,6 +118,8 @@ function updateRewardsTable(){
   ul.appendChild(li);
 
   var bList = localStorage.getObj('pointHist');
+
+  var count = 0;
 
 	for (var i = (bList.length-1); i >= 0; i--) {
 
@@ -132,6 +134,13 @@ function updateRewardsTable(){
       li.appendChild(TN);
 
       ul.appendChild(li);
+
+      count++;
+
+      if(count >= 5){
+        break;
+      }
+
 		}
 
 
