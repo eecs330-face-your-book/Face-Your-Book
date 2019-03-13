@@ -1,4 +1,3 @@
-
 Storage.prototype.setObj = function(key, obj) {
     return this.setItem(key, JSON.stringify(obj))
 }
@@ -11,16 +10,18 @@ function init() {
   if(localStorage.getObj('books') === null){
 	localStorage.setObj('books', books);
 
+
  
 	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
 	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []);
 
-	
-	localStorage.setObj('sums', "");
-  } 
 
-	updateBookLog();  
-	
+
+	localStorage.setObj('sums', "");
+  }
+
+	updateBookLog();
+
 	loadDropdown();
 	loadDropdown2();
 	viewSummaries();
@@ -30,13 +31,14 @@ function init() {
 function loadDropdown(){
 	var dd = document.getElementById("title-dropdown");
 	var bList = localStorage.getObj('books');
-	
+
 	for (var i = (bList.length-1); i >= 0; i--) {
 		var o = document.createElement("option");
 		o.setAttribute("value", bList[i].title);
 		o.innerHTML = bList[i].title;
 		dd.appendChild(o)
 	}
+
 }
 
 function viewSummaries(){
@@ -72,6 +74,7 @@ function loadDropdown2(){
 		dd.appendChild(o)
 	}
 	
+
 }
 
 function updateBookLog(){
@@ -88,7 +91,7 @@ function updateBookLog(){
 
       var li = document.createElement("li");
       var name = bList[i].title;
-	  
+
       var status = bList[i].pgNumber;
 	  var time = bList[i].timeSpent;
 	  var sumtext = bList[i].summary;
@@ -116,7 +119,7 @@ function updateBookLog(){
 			  displayPgUpdate(curInd + '');
 		  }
 	  })();
-	  
+
       li.appendChild(TN);
 	  li.appendChild(sum);
       ul.appendChild(li);
@@ -154,10 +157,12 @@ function pgSubmit() {
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
 			bList[i].finished = fin;
+
 			bList[i].summary.push(sums);
+
 		}
 	}
-	
+
 	localStorage.setObj('books', bList);
 	updateBookLog();
 	document.getElementById("form-log").reset();
@@ -203,13 +208,14 @@ function submitLog() {
 	var elem = document.getElementById("form-log").elements;
 	var dd = document.getElementById("title-dropdown");
 	var name = dd.value;
-	
+
 	var sums = document.getElementById("add-summary-text").value;
 	var bList = localStorage.getObj('books');
 
 	for (var i = 0; i < bList.length; i++) {
 		if (name == bList[i].title) {
 			bList[i].summary.push(sums);
+
 		}
 	}
 
