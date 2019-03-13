@@ -37,15 +37,21 @@
                <li class="active"><a href="BookLog.html">Book Log</a></li>
                <li><a href="Summaries.html">Summaries</a></li>
                <li><a href="Recommendations.html">Find a New Book</a></li>
-               <li><a href="#">MyRewards</a></li>
+               <li><a href="rewards.html">MyRewards</a></li>
             </ul>
          </div>
+
       </nav>
 	  <div class="summary-display" id="sum-display">
 			<h1>Summary</h1>
 			<p id="sumdisplay-text">Default text</p>
 			<button id="closeSum" onclick="closeSummary()">Close</button>
 	  </div>
+
+    <div class="popup" onclick="popupReward()">
+      <span class="popuptext" id="myPopup">A Simple Popup!</span>
+    </div>
+
       <div class="bookLog">
 	<h1>Book Log</h1>
         <ul id="bookLogList">

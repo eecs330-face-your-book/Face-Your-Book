@@ -28,15 +28,15 @@ function init() {
 
   }
 
-  if(localStorage.getObj('pointHsit') === null){
+  if(localStorage.getObj('pointHist') === null){
 	localStorage.setObj('pointHist', badges);
   localStorage.setObj('user', badges);
 
-	addPoints("Read 25 pages", 20);
+  createUser("FILL_ME_IN", 4, 0);
+
+  addPoints("Read 25 pages", 20);
 	addPoints("Start a new book", 25);
   addPoints("3-day streak", 10);
-
-  createUser("FILL_ME_IN", 4, 50);
 
   }
 
@@ -119,7 +119,7 @@ function updateRewardsTable(){
 
   var bList = localStorage.getObj('pointHist');
 
-	for (var i = 0; i < bList.length; i++) {
+	for (var i = (bList.length-1); i >= 0; i--) {
 
       var li = document.createElement("li");
       var name = bList[i].name;
@@ -292,6 +292,15 @@ function addPoints(name, points) {
 	var pList = localStorage.getObj('pointHist');
       pList.push(point);
 	localStorage.setObj('pointHist', pList);
+
+  var user = localStorage.getObj('user');
+  user[0].points = user[0].points + points;
+  if(user[0].points >= 100){
+    user[0].points = user[0].points - 100;
+    user[0].lvl = user[0].lvl + 1;
+    popupReward("LEVEL UP");
+  }
+  localStorage.setObj('user', user)
 }
 
 function createUser(name, lvl, points) {

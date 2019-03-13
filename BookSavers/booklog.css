@@ -162,8 +162,8 @@ button {
 	position: fixed;
 	display: none;
 
-	
-	
+
+
 }
 
 .summary-display h1{
@@ -178,10 +178,10 @@ button {
 	 border-radius: 1em;
 	 border: 1px solid #000000;
 	 background-color: #E7E3D4;
-	 padding-left: 25px;	
+	 padding-left: 25px;
 	 margin-right: 5%;
 	 position: relative;
-	 
+
 }
 
 .summary-display button{
@@ -244,4 +244,53 @@ button {
 /* Add some hover effects to buttons */
 .pgform-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+.popup {
+
+  float: right;
+  margin-right: 10%;
+  margin-top: 1.5%;
+
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #8590AA;
+  color: #E7E3D4;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
