@@ -120,7 +120,7 @@ function pgSubmit() {
 
 	for (var i = 0; i < bList.length; i++) {
 		if (title == bList[i].title) {
-      newPages = currPg - bList[i].pgNumber;
+			newPages = currPg - bList[i].pgNumber;
 			bList[i].pgNumber = currPg;
 			var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
 			bList[i].timeSpent = ts.toString();
@@ -131,13 +131,18 @@ function pgSubmit() {
 		}
 	}
 
-  if(logForm[5].length > 0){
-    var msg = "Added a summary";
-    addPoints(msg, 5);
-    msg = msg + " +5"
-    popupReward(msg);
-  }
+    if(sums.length > 0){
+      var msg = "Added a summary";
+      addPoints(msg, 5);
+      msg = msg + " +5"
+      popupReward(msg);
+    }
 
+	var msg = "Read " + newPages + " pages";
+    addPoints(msg, 20);
+    addData(title, newPages, ts);
+    msg = msg + " +20"
+    popupReward(msg);
 
 	localStorage.setObj('books', bList);
 	updateBookLog();
@@ -196,7 +201,7 @@ function submitLog() {
 	var existsFlag = false;
 	var bList = localStorage.getObj('books');
 
-  var newPages = 0;
+    var newPages = 0;
 
 	for (var i = 0; i < bList.length; i++) {
 		if (logForm[0] == bList[i].title) {
