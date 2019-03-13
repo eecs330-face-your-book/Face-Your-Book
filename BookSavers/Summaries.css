@@ -32,8 +32,7 @@ label {
 }
 
 #form-log {
- float: right;
- margin-right: 10%;
+ float: left;
 }
 
 #form-log select{
@@ -43,6 +42,20 @@ label {
 
 #form-log option{
 	border: 1px solid black;
+}
+
+#last-sum {
+	float: left;
+	margin-left: 3%;
+}
+
+#last-sum textarea{
+  background-color: #E7E3D4;
+  margin-bottom: 2%;
+}
+
+#last-sum select {
+	background-color: #E7E3D4;
 }
 
 input {
@@ -106,7 +119,7 @@ button {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 30%;
+ margin-left: 3%;
  border-radius: 1em;
 }
 
