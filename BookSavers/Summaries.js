@@ -63,6 +63,7 @@ function viewSummaries(){
 	}
 }
 
+
 function loadDropdown2(){
 	var dd = document.getElementById("title-dropdown-2");
 	var bList = localStorage.getObj('books');
