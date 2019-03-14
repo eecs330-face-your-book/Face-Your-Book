@@ -16,7 +16,7 @@ form {
   width: 150px;
   background-color: #3B8BEB;
   float: left;
-  margin-left: 30%;
+  margin-left: 8%;
   border-radius: 1em;
   text-align: center;
 }
@@ -97,161 +97,35 @@ button {
   z-index: 9;
 }
 
-.bookLog {
+.rewards {
  border: 1px solid #000000;
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 30%;
+ margin-left: 5%;
  border-radius: 1em;
 }
 
-.bookLog h1 {
+.rewards h1 {
+
+ font-size: 21px;
+ margin-left: 30px;
+}
+
+.badges {
+ border: 1px solid #000000;
+ width: 300px;
+ background-color: #3B8BEB;
+ float: left;
+ margin-left: 5%;
+ border-radius: 1em;
+}
+
+.badges h1 {
 
  font-size: 21px;
  margin-left: 30px;
 }
 
 
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: #B23850	;
-}
 
-/* Full-width input fields */
-.form-container h1{
-	font-size: 21px;
-}
-
-/* When the inputs get focus, do something */
-.form-container textarea:focus{
-  border-color: #000;
-}
-
-/* When the inputs get focus, do something */
-.form-container textarea{
-  background-color: #E7E3D4;
-
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #C4DBF6 ;
-  color: black;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-  margin-top: 5%;
-  margin-left: 0;
-  margin-bottom: 0;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: #8590AA;
-  color: white;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-
-.summary-display{
-	z-index: 30;
-	border-radius: 1em;
-	border: 1px solid #000000;
-	background-color: #B23850;
-	width: 300px;
-	margin-left: 30%;
-	margin-top: 7%;
-	position: fixed;
-	display: none;
-
-
-
-}
-
-.summary-display h1{
-	font-size: 21px;
-	margin-top: 5%;
-	margin-left: 30px;
-}
-
-.summary-display p{
-	 margin-left: 25px;
-	 padding-top: 5px;
-	 border-radius: 1em;
-	 border: 1px solid #000000;
-	 background-color: #E7E3D4;
-	 padding-left: 25px;
-	 margin-right: 5%;
-	 position: relative;
-
-}
-
-.summary-display button{
-	margin-left: 40%;
-	margin-bottom: 2%;
-}
-
-
-/* The popup form - hidden by default */
-.pg-popup {
-  display: none;
-  position: relative;
-  left: 30%;
-  bottom: 20%;
-  z-index: 9;
-}
-
-
-/* Add styles to the form container */
-.pgform-container {
-  max-width: 300px;
-  padding-left: 3%;
-  background-color: #B23850	;
-}
-
-/* Full-width input fields */
-.pgform-container h1{
-	font-size: 21px;
-}
-
-
-.pgform-container input {
-	width: 90%;
-}
-
-.pgform-container input[type="checkbox"]{
-  width: 10%;
-}
-
-/* Set a style for the submit/login button */
-.pgform-container .btn {
-  background-color: #C4DBF6 ;
-  color: black;
-  border: none;
-  cursor: pointer;
-  width: 90%;
-  margin-bottom:10px;
-  opacity: 0.8;
-  margin-top: 5%;
-  margin-left: 0;
-  margin-bottom: 0;
-}
-
-/* Add a red background color to the cancel button */
-.pgform-container .cancel {
-  background-color: #8590AA;
-  color: white;
-}
-
-/* Add some hover effects to buttons */
-.pgform-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
