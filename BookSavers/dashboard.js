@@ -40,11 +40,15 @@ function init() {
 
   }
 
+
+
     if (localStorage.getObj('pointHist') === null) {
         localStorage.setObj('pointHist', badges);
         localStorage.setObj('user', badges);
-
-        createUser("FILL_ME_IN", 4, 0);
+		var usr = localStorage.getObj('username');
+		var pw = localStorage.getObj('password');
+		console.log(usr, pw);
+        createUser(usr, 4, 0, pw);
 
         addPoints("Read 25 pages", 20);
         addPoints("Start a new book", 25);
@@ -300,11 +304,12 @@ function addData(book, time, pages) {
 
 }
 
-function createUser(name, lvl, points) {
+function createUser(name, lvl, points, pw) {
     var user = new Object();
     user.name = name;
     user.lvl = lvl;
     user.points = points;
+	user.pw = pw;
 
     var userList = localStorage.getObj('user');
     userList.push(user);
