@@ -43,6 +43,16 @@ function init() {
     addPastData("Ender's Game", 2, 43, 10, 3, 2019);
     addPastData("Ender's Game", 2, 7, 9, 3, 2019);
     addPastData("Ender's Game", 2, 5, 8, 3, 2019);
+    addPastData("Ender's Game", 2, 140, 8, 2, 2019);
+    addPastData("Ender's Game", 2, 121, 8, 1, 2019);
+    addPastData("Ender's Game", 2, 79, 8, 11, 2018);
+    addPastData("Ender's Game", 2, 105, 8, 11, 2018);
+    addPastData("Ender's Game", 2, 99, 8, 10, 2018);
+    addPastData("Ender's Game", 2, 76, 8, 9, 2018);
+    addPastData("Ender's Game", 2, 21, 8, 8, 2018);
+    addPastData("Ender's Game", 2, 87, 8, 7, 2018);
+    addPastData("Ender's Game", 2, 67, 8, 6, 2018);
+    addPastData("Ender's Game", 2, 53, 8, 5, 2018);
 
   }
 
@@ -138,6 +148,82 @@ function updateChartThisWeek(){
 
 }
 
+function updateChartThisMonth(){
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    var label = [];
+    var data = [];
+
+    mm = mm+1;
+
+    if(mm == 13){
+      mm = 1;
+    }else{
+      yyyy = yyyy-1;
+    }
+
+
+
+
+
+    for(var i = 0; i < 12; i++){
+
+      label.push(mm+'/'+yyyy);
+      data.push(numPagesForMonth(mm,yyyy));
+
+      mm = mm+1;
+
+      if(mm == 13){
+        mm = 1;
+        yyyy = yyyy + 1;
+      }
+
+    }
+
+    var chart = document.getElementById("bookPlot").getContext('2d');
+
+    Chart.defaults.global.defaultFontColor = 'black';
+
+    let barChart = new Chart(chart, {
+      type: 'line', //bar, line
+      data:{
+        labels: label,
+        datasets:[{
+          label: 'Pages',
+          data:data,
+          backgroundColor: '#C4DBF6'
+
+        }],
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Pages Read This Month',
+          fontSize:20
+        },
+        legend:{
+          display:false,
+          position:'right'
+        },
+        scales: {
+        yAxes: [{
+            display: true,
+            ticks: {
+                beginAtZero: true   // minimum value will be 0.
+            }
+        }]
+    }
+
+
+      }
+    });
+
+}
+
 function updateBookLog(){
 
   var ul = document.getElementById("bookLogList");
@@ -186,7 +272,7 @@ function updateBookLog(){
 		}
 
 
-    updateChartThisWeek();
+    updateChartThisMonth();
 }
 
 
@@ -476,6 +562,23 @@ function numPagesForDay(day, month, year){
   }
 
   console.log(pages);
+  return pages;
+
+}
+
+function numPagesForMonth(month, year){
+
+  var dataList = localStorage.getObj('history');
+  var pages = 0;
+
+  for(var i=0; i < dataList.length; i++){
+
+    if(dataList[i].month == month && dataList[i].year == year){
+      pages = pages + dataList[i].pages;
+    }
+
+  }
+
   return pages;
 
 }

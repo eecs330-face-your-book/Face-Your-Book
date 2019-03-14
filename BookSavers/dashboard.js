@@ -19,7 +19,7 @@ function init() {
 
         localStorage.setObj('sums', "");
     }
-	
+
 	if (localStorage.getObj('bookLib') === null) {
     localStorage.setObj('bookLib', books);
 
@@ -55,25 +55,130 @@ function init() {
 
     }
 
-    if (localStorage.getObj('history') === null) {
-        localStorage.setObj('history', badges);
+    if(localStorage.getObj('history') === null){
+      localStorage.setObj('history', badges);
 
-        addPastData("Ender's Game", 2, 25, 17, 2, 2019);
-        addPastData("Ender's Game", 2, 50, 22, 2, 2019);
+      addPastData("Ender's Game", 2, 25, 14, 3, 2019);
+      addPastData("Ender's Game", 2, 50, 13, 3, 2019);
+      addPastData("Ender's Game", 2, 17, 13, 3, 2019);
+      addPastData("Ender's Game", 2, 12, 11, 3, 2019);
+      addPastData("Ender's Game", 2, 43, 10, 3, 2019);
+      addPastData("Ender's Game", 2, 7, 9, 3, 2019);
+      addPastData("Ender's Game", 2, 5, 8, 3, 2019);
+      addPastData("Ender's Game", 2, 140, 8, 2, 2019);
+      addPastData("Ender's Game", 2, 121, 8, 1, 2019);
+      addPastData("Ender's Game", 2, 79, 8, 11, 2018);
+      addPastData("Ender's Game", 2, 105, 8, 11, 2018);
+      addPastData("Ender's Game", 2, 99, 8, 10, 2018);
+      addPastData("Ender's Game", 2, 76, 8, 9, 2018);
+      addPastData("Ender's Game", 2, 21, 8, 8, 2018);
+      addPastData("Ender's Game", 2, 87, 8, 7, 2018);
+      addPastData("Ender's Game", 2, 67, 8, 6, 2018);
+      addPastData("Ender's Game", 2, 53, 8, 5, 2018);
 
     }
-	
+
 	viewSummaries();
 	booksForYou();
 
 	updatePointsToGo();
+  updateChartThisWeek();
 
 }
+
+function updateChartThisWeek(){
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    var label = [];
+    var data = [];
+
+    if((dd-6) < 1){
+
+      if(m==1){
+        dd = 31 - Math.abs(dd-7);
+        mm=12;
+        yyyy=yyyy-1;
+      }else if(m==2){
+        dd = 28 - Math.abs(dd-7);
+        mm = mm-1;
+      }else if(mm==4 || mm==6 || mm==9 || mm==11){
+        dd = 30 - Math.abs(dd-7);
+        mm = mm-1;
+      }else{
+        dd = 31 - Math.abs(dd-7);
+        mm = mm-1;
+      }
+
+    }else{
+      dd = dd - 6;
+    }
+
+    for(var i = 0; i < 7; i++){
+
+      label.push(mm+'/'+dd+'/'+yyyy);
+      data.push(numPagesForDay(dd,mm,yyyy));
+
+      dd = dd+1;
+      if( (dd==29 && mm==2) || (dd==31 && (mm==4 || mm==6 || mm==9 || mm==11) ) || dd==32){
+        dd = 1;
+        mm = mm+1;
+        if(mm = 13){
+          mm = 1;
+          yyyy = yyyy+1;
+        }
+      }
+
+    }
+
+    var chart = document.getElementById("bookPlot").getContext('2d');
+
+    Chart.defaults.global.defaultFontColor = 'black';
+
+    let barChart = new Chart(chart, {
+      type: 'bar', //bar, line
+      data:{
+        labels: label,
+        datasets:[{
+          label: 'Pages',
+          data:data,
+          backgroundColor: '#C4DBF6'
+
+        }],
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Pages Read This Week',
+          fontSize:20
+        },
+        legend:{
+          display:false,
+          position:'right'
+        },
+        scales: {
+        yAxes: [{
+            display: true,
+            ticks: {
+                beginAtZero: true   // minimum value will be 0.
+            }
+        }]
+    }
+
+
+      }
+    });
+
+}
+
 
 function updatePointsToGo(){
 	var user = localStorage.getObj('user')[0];
 	var pointsLeft = 100 - user.points;
-	
+
 	var span = document.getElementById("points-to-go");
 	span.innerHTML = pointsLeft;
 }
@@ -91,23 +196,23 @@ function booksForYou(){
 	var bLib = localStorage.getObj('bookLib');
 	var best = bestRatedBook();
 	var simList = [];
-	
+
 	for(var i=0; i<bLib.length; i++){
 		if(best == bLib[i].title){
 			simList = bLib[i].similar;
 		}
 	}
-	
+
 	updateBooksForYou(simList);
 }
 
 function updateBooksForYou(simList){
 	var ul = document.getElementById('RecommendationsList');
-	
+
 	while (ul.firstChild) {
     ul.removeChild(ul.firstChild);
 	}
-	
+
 	ul.setAttribute("style", "margin-left: 1%; list-style-type: none;");
 	for(var i=0; i < simList.length; i++){
 		if(i < 3){
@@ -125,14 +230,14 @@ function updateBooksForYou(simList){
 			  var title = simList[i];
 			  return function (){
 				  takeAmazon(title);
-			  }  
+			  }
 			})();
 			ul.appendChild(li);
-			
+
 			var rr = getRatingReview(simList[i]);
 			var rating = rr[0];
 			var review = rr[1];
-			
+
 			var li2 = document.createElement('li');
 			li2.setAttribute("style", "margin-bottom: 1%;");
 			var ratDiv = document.createElement('div');
@@ -163,7 +268,7 @@ function bestRatedBook(){
 	var bList = localStorage.getObj('books');
 	var bLib = localStorage.getObj('bookLib');
 	var ratingList = [];
-	
+
 	for(var i = 0; i < bList.length; i++){
 		var title = bList[i].title;
 		var rating = -1;
@@ -174,7 +279,7 @@ function bestRatedBook(){
 		}
 		ratingList.push(rating);
 	}
-	
+
 	var maxRating = ratingList[0]
 	var maxInd = 0;
 	for(var i = 1; i < ratingList.length; i++){
@@ -183,7 +288,7 @@ function bestRatedBook(){
 			maxInd = i;
 		}
 	}
-	
+
 	return bList[maxInd].title;
 
 }
@@ -206,7 +311,7 @@ function viewSummaries(){
 		}
 	}
 	sumArea.innerHTML = sums;
-	
+
 }
 
 function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
@@ -313,4 +418,21 @@ function createUser(name, lvl, points, pw) {
     var userList = localStorage.getObj('user');
     userList.push(user);
     localStorage.setObj('user', userList);
+}
+
+function numPagesForDay(day, month, year){
+
+  var dataList = localStorage.getObj('history');
+  var pages = 0;
+
+  for(var i=0; i < dataList.length; i++){
+
+    if(dataList[i].day == day && dataList[i].month == month && dataList[i].year == year){
+      pages = pages + dataList[i].pages;
+    }
+
+  }
+
+  console.log(pages);
+  return pages;
 }
