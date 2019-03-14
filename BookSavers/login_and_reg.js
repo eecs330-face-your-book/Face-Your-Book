@@ -26,7 +26,7 @@ function submitRegister(){
     var username = inputUsername.value;
     var password = inputPassword.value;
     if ((username == localStorage.getItem('username')) && (password == localStorage.getItem('password'))) {
-       window.open("Booklog.html", "_top");
+       window.open("Dashboard.html", "_top");
      //document.getElementById('welcomeMessage').innerHTML = "Welcome " + localStorage.getItem('username') + "!";
       } 
 	   //else {
