@@ -62,6 +62,7 @@ function init() {
 	
 	viewSummaries();
 	booksForYou();
+
 	updatePointsToGo();
 
 }
@@ -73,6 +74,7 @@ function updatePointsToGo(){
 	var span = document.getElementById("points-to-go");
 	span.innerHTML = pointsLeft;
 }
+
 
 function takeAmazon(title){
 	var fp = "https://www.amazon.com/s?k=";
