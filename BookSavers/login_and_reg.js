@@ -1,3 +1,10 @@
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+
 function submitLogin(){
   window.open("BookLog.html", "_top"); 
 }
@@ -11,8 +18,8 @@ function submitRegister(){
     //document.getElementById('welcomeMessage').innerHTML = "";
     var inputUsername= theForm["username"];
     var inputPassword= theForm["password"];
-    localStorage.setItem("username", inputUsername.value);
-    localStorage.setItem("password", inputPassword.value);
+    localStorage.setObj("username", inputUsername.value);
+    localStorage.setObj("password", inputPassword.value);
     window.open("login.html", "_top");
     //document.getElementById('welcomeMessage').innerHTML = "Welcome " + localStorage.getItem('username') + "!";
     return false;
@@ -25,7 +32,7 @@ function submitRegister(){
     var inputPassword = theForm["password"];
     var username = inputUsername.value;
     var password = inputPassword.value;
-    if ((username == localStorage.getItem('username')) && (password == localStorage.getItem('password'))) {
+    if ((username == localStorage.getObj('username')) && (password == localStorage.getObj('password'))) {
        window.open("Dashboard.html", "_top");
      //document.getElementById('welcomeMessage').innerHTML = "Welcome " + localStorage.getItem('username') + "!";
       } 
