@@ -1,26 +1,27 @@
 <html>
    <head>
-      <title>Rewards</title>
+      <title>Dashboard</title>
    </head>
    <body onload="init()">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="booksavers.css">
-      <link rel="stylesheet" href="rewards.css">
+	  <link rel="stylesheet" href="dashboard.css">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script src="rewards.js"></script>
+	  <script src="dashboard.js"></script>
+       
       <nav class="navbar navbar-default">
          <div class="container-fluid">
             <ul class="nav navbar-nav">
 				<li><div id = "logo">
             <img src="images/logo8.png">
          </div></li>
-               <li><a href="dashboard.html">Dashboard</a></li>
+               <li  class="active"><a href="Dashboard.html">Dashboard</a></li>
                <li><a href="BookLog.html">Book Log</a></li>
                <li><a href="Summaries.html">Summaries</a></li>
                <li><a href="Recommendations.html">Find a New Book</a></li>
-               <li class="active"><a href="rewards.html">MyRewards</a></li>
+               <li><a href="rewards.html">MyRewards</a></li>
 			   <li><div class="user_button">
                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
@@ -33,33 +34,32 @@
                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
                   </ul>
                </div>
-
             </div></li>
-
             </ul>
          </div>
       </nav>
-	  <div class="summary-display" id="sum-display">
-			<h1>Summary</h1>
-			<p id="sumdisplay-text">Default text</p>
-			<button id="closeSum" onclick="closeSummary()">Close</button>
-	  </div>
-    <div class="bookLog">
-<h1>My Rewards</h1>
-      <ul id="rewardsHist">
+	  <div class="last-sum">
+         <form id="last-sum">
+            <fieldset>
+               <legend>View Summaries for Most Recent Book</legend>
+			   <p>Here are your summaries for the most recent book that you read.</p>
+               <div>
+                  <label for="title">Title:</label>
+                  <textarea name="title" id="title-box" rows="1" cols="48"></textarea>
+               </div>
+				<div>
+					<label for="summary">Summary:</label>
+					<textarea name="summary" rows="8" cols="48" id="last-summary-text"></textarea>
+				</div>
+            </fieldset>
+         </form>
+      </div>
+	  <div class="recList">
+		<h1>Books For You</h1>
+		<p>Here are some books that we think you will enjoy!</p>
+        <ul id="RecommendationsList">
+        </ul>
+      </div>
 
-      </ul>
-    </div>
-    <div class="bookLog">
-      <h1>My Badges</h1>
-      <ul id="badgeHist">
-
-      </ul>
-    </div>
-
-    <div class="streakBar">
-      Streak of 42 days
-    </div>
-
-   </body>
+     </body>
 </html>
