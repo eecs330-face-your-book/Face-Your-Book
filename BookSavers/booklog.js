@@ -13,14 +13,13 @@ function init() {
   if(localStorage.getObj('books') === null){
 	localStorage.setObj('books', books);
 
-	
+
 	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
-	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []); 
-	
+	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []);
+
 
 	localStorage.setObj('sums', "");
   }
-  updateBookLog();
 
   if(localStorage.getObj('pointHist') === null){
 	   localStorage.setObj('pointHist', badges);
@@ -37,10 +36,105 @@ function init() {
   if(localStorage.getObj('history') === null){
     localStorage.setObj('history', badges);
 
-    addPastData("Ender's Game", 2, 25, 17, 2, 2019);
-    addPastData("Ender's Game", 2, 50, 22, 2, 2019);
+    addPastData("Ender's Game", 2, 25, 14, 3, 2019);
+    addPastData("Ender's Game", 2, 50, 13, 3, 2019);
+    addPastData("Ender's Game", 2, 17, 13, 3, 2019);
+    addPastData("Ender's Game", 2, 12, 11, 3, 2019);
+    addPastData("Ender's Game", 2, 43, 10, 3, 2019);
+    addPastData("Ender's Game", 2, 7, 9, 3, 2019);
+    addPastData("Ender's Game", 2, 5, 8, 3, 2019);
 
   }
+
+  updateBookLog();
+
+}
+
+function updateChartThisWeek(){
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    var label = [];
+    var data = [];
+
+    if((dd-6) < 1){
+
+      if(m==1){
+        dd = 31 - Math.abs(dd-7);
+        mm=12;
+        yyyy=yyyy-1;
+      }else if(m==2){
+        dd = 28 - Math.abs(dd-7);
+        mm = mm-1;
+      }else if(mm==4 || mm==6 || mm==9 || mm==11){
+        dd = 30 - Math.abs(dd-7);
+        mm = mm-1;
+      }else{
+        dd = 31 - Math.abs(dd-7);
+        mm = mm-1;
+      }
+
+    }else{
+      dd = dd - 6;
+    }
+
+    for(var i = 0; i < 7; i++){
+
+      label.push(mm+'/'+dd+'/'+yyyy);
+      data.push(numPagesForDay(dd,mm,yyyy));
+
+      dd = dd+1;
+      if( (dd==29 && mm==2) || (dd==31 && (mm==4 || mm==6 || mm==9 || mm==11) ) || dd==32){
+        dd = 1;
+        mm = mm+1;
+        if(mm = 13){
+          mm = 1;
+          yyyy = yyyy+1;
+        }
+      }
+
+    }
+
+    var chart = document.getElementById("bookPlot").getContext('2d');
+
+    Chart.defaults.global.defaultFontColor = 'black';
+
+    let barChart = new Chart(chart, {
+      type: 'bar', //bar, line
+      data:{
+        labels: label,
+        datasets:[{
+          label: 'Pages',
+          data:data,
+          backgroundColor: '#C4DBF6'
+
+        }],
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Pages Read This Week',
+          fontSize:20
+        },
+        legend:{
+          display:false,
+          position:'right'
+        },
+        scales: {
+        yAxes: [{
+            display: true,
+            ticks: {
+                beginAtZero: true   // minimum value will be 0.
+            }
+        }]
+    }
+
+
+      }
+    });
 
 }
 
@@ -92,7 +186,7 @@ function updateBookLog(){
 		}
 
 
-
+    updateChartThisWeek();
 }
 
 
@@ -227,7 +321,7 @@ function submitLog() {
 	var sumArr = [];
 	sumArr.push(logForm[5]);
 	if(!existsFlag){
-    
+
 		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], sumArr);
 
     newPages = logForm[2];
@@ -306,13 +400,13 @@ function addPoints(name, points) {
   localStorage.setObj('user', user);
 }
 
-function addPastData(book, time, pages, day, week, year) {
+function addPastData(book, time, pages, day, month, year) {
 	var dataPoint = new Object();
 	dataPoint.book = book;
 	dataPoint.time = time;
   dataPoint.pages = pages;
   dataPoint.day = day;
-	dataPoint.week = week;
+	dataPoint.month = month;
   dataPoint.year = year;
 
 	var dataList = localStorage.getObj('history');
@@ -324,15 +418,15 @@ function addPastData(book, time, pages, day, week, year) {
 function addData(book, time, pages) {
 	var dataPoint = new Object();
 	dataPoint.book = book;
-	dataPoint.time = time;
-  dataPoint.pages = pages;
+	dataPoint.time = parseFloat(time);
+  dataPoint.pages = parseInt(pages);
 
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth() + 1; //January is 0!
   var yyyy = today.getFullYear();
   dataPoint.day = dd;
-	dataPoint.week = mm;
+	dataPoint.month = mm;
   dataPoint.year = yyyy;
 
 	var dataList = localStorage.getObj('history');
@@ -365,5 +459,23 @@ function popupReward(msg) {
     }
   })();
   popupList.appendChild(popup);
+
+}
+
+function numPagesForDay(day, month, year){
+
+  var dataList = localStorage.getObj('history');
+  var pages = 0;
+
+  for(var i=0; i < dataList.length; i++){
+
+    if(dataList[i].day == day && dataList[i].month == month && dataList[i].year == year){
+      pages = pages + dataList[i].pages;
+    }
+
+  }
+
+  console.log(pages);
+  return pages;
 
 }

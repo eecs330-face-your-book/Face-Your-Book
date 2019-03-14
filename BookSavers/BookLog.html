@@ -8,9 +8,10 @@
       <link rel="stylesheet" href="booksavers.css">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="booklog.js"></script>
-      
+
       <nav class="navbar navbar-default">
          <div class="container-fluid">
             <ul class="nav navbar-nav">
@@ -57,6 +58,11 @@
 
         </ul>
       </div>
+
+      <div class="bookLog">
+        <canvas id="bookPlot"> </canvas>
+      </div>
+
       <div class="log_form">
          <form id="form-log">
             <fieldset>
