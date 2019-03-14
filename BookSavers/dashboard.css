@@ -42,7 +42,8 @@ label {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 30%;
+ margin-left: 5%;
+
  border-radius: 1em;
 }
 
@@ -64,5 +65,22 @@ label {
 .recList p{
 	margin-left: 7%;
 	margin-right: 5%;
+}
+
+
+
+.rewardNext {
+ border: 1px solid #000000;
+ width: 300px;
+ background-color: #3B8BEB;
+ float: left;
+ margin-left: 5%;
+ border-radius: 1em;
+}
+
+.rewardNext p{
+	margin-left: 7%;
+	margin-right: 5%;
+	margin-top: 2%;
 }
 
