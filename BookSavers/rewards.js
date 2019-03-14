@@ -32,7 +32,9 @@ function init() {
 	localStorage.setObj('pointHist', badges);
   localStorage.setObj('user', badges);
 
-  createUser("FILL_ME_IN", 4, 0);
+  var usr = localStorage.getObj('username');
+  var pw = localStorage.getObj('password');
+  createUser(usr, 4, 0, pw);
 
   addPoints("Read 25 pages", 20);
 	addPoints("Start a new book", 25);
@@ -312,11 +314,12 @@ function addPoints(name, points) {
   localStorage.setObj('user', user)
 }
 
-function createUser(name, lvl, points) {
+function createUser(name, lvl, points, pw) {
 	var user = new Object();
 	user.name = name;
   user.lvl = lvl;
 	user.points = points;
+	user.pw = pw;
 
 	var userList = localStorage.getObj('user');
       userList.push(user);

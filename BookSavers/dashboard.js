@@ -47,7 +47,6 @@ function init() {
         localStorage.setObj('user', badges);
 		var usr = localStorage.getObj('username');
 		var pw = localStorage.getObj('password');
-		console.log(usr, pw);
         createUser(usr, 4, 0, pw);
 
         addPoints("Read 25 pages", 20);
