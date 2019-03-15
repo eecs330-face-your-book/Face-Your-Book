@@ -25,12 +25,12 @@ label {
   text-align: left;
 }
 
-#update-usr {
+#update-pw {
 	float: left;
 	margin-left: 33%;
 }
 
-#update-usr input{
+#update-pw input{
   background-color: #E7E3D4;
   margin-bottom: 2%;
 }
