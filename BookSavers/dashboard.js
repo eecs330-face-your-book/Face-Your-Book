@@ -385,13 +385,13 @@ function addPoints(name, points) {
     localStorage.setObj('user', user);
 }
 
-function addPastData(book, time, pages, day, week, year) {
+function addPastData(book, time, pages, day, month, year) {
     var dataPoint = new Object();
     dataPoint.book = book;
     dataPoint.time = time;
     dataPoint.pages = pages;
     dataPoint.day = day;
-    dataPoint.week = week;
+    dataPoint.month = month;
     dataPoint.year = year;
 
     var dataList = localStorage.getObj('history');
@@ -437,15 +437,19 @@ function numPagesForDay(day, month, year) {
     var dataList = localStorage.getObj('history');
     var pages = 0;
 
-    for (var i = 0; i < dataList.length; i++) {
+	console.log(typeof(day), month, year);
 
+    for (var i = 0; i < dataList.length; i++) {
+		console.log(typeof(dataList[i].day), typeof(day), typeof(dataList[i].month), typeof(month), typeof(dataList[i].year), typeof(year));
+		console.log(dataList[i].month);
         if (dataList[i].day == day && dataList[i].month == month && dataList[i].year == year) {
-            pages = pages + dataList[i].pages;
+			var pg = dataList[i].pages;
+			
+            pages = pages + pg;
         }
 
     }
 
-    console.log(pages);
     return pages;
 }
 
