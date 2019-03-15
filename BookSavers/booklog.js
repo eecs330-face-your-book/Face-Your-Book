@@ -417,7 +417,7 @@ function submitLog() {
 	if(!existsFlag){
 
 		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], sumArr, [logForm[5]]);
-		updateReviewLib(logform[0], logForm[5]);
+		updateReviewLib(logForm[0], logForm[5]);
 
     newPages = logForm[2];
 
