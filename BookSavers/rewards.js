@@ -325,3 +325,10 @@ function createUser(name, lvl, points, pw) {
       userList.push(user);
 	localStorage.setObj('user', userList);
 }
+
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
+}

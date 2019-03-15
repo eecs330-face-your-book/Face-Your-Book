@@ -582,3 +582,10 @@ function numPagesForMonth(month, year){
   return pages;
 
 }
+
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
+}

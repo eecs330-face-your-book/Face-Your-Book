@@ -436,3 +436,9 @@ function numPagesForDay(day, month, year){
   console.log(pages);
   return pages;
 }
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
+}
