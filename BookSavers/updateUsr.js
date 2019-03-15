@@ -59,3 +59,10 @@ function popupReward(msg) {
   popupList.appendChild(popup);
 
 }
+
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
+}
