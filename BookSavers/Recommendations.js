@@ -39,6 +39,18 @@ function init() {
 
   }
 
+  if(localStorage.getObj('pointHist') === null){
+	   localStorage.setObj('pointHist', badges);
+     localStorage.setObj('user', badges);
+
+     createUser("FILL_ME_IN", 4, 0);
+
+     addPoints("Read 25 pages", 20);
+	   addPoints("Start a new book", 25);
+     addPoints("3-day streak", 10);
+
+  }
+
   updateOptions();
   updateBookLib();
   loadDropdown();
@@ -84,8 +96,6 @@ function updateOptions() {
 }
 
 function updateLibDropdown() {
-
-
 
   var bList = localStorage.getObj('bookLib');
   var dropdown = document.getElementById("lib-list");
@@ -195,7 +205,7 @@ function updateBookLib() {
 	  ul.setAttribute("style", "list-style-type: none;");
       var li = document.createElement("li");
 	  var TN = document.createElement('p');
-      TN.innerHTML = "No similar books have been found. Please add a connection.";
+      TN.innerHTML = "No similar books have been found. Please choose another book that is similar.";
       TN.setAttribute("style", "margin-bottom: 0%;");
 	  li.appendChild(TN);
       ul.appendChild(li);
@@ -370,6 +380,11 @@ function submitLog() {
 
   localStorage.setObj('bookLib', bList);
 
+  var msg = "Added a review";
+  addPoints(msg, 5);
+  msg = msg + " +5"
+  popupReward(msg);
+
 
   updateBookLib();
   document.getElementById("form-log").reset();
@@ -404,4 +419,50 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
   var bList = localStorage.getObj('books');
   bList.push(book);
   localStorage.setObj('books', bList);
+}
+
+function createUser(name, lvl, points) {
+	var user = new Object();
+	user.name = name;
+  user.lvl = lvl;
+	user.points = points;
+
+	var userList = localStorage.getObj('user');
+      userList.push(user);
+	localStorage.setObj('user', userList);
+}
+
+function popupReward(msg) {
+  var popupList = document.getElementById("popupList");
+  var popup = document.createElement("span");
+  popup.setAttribute("class", "popuptext");
+  popup.innerHTML = msg;
+  popup.classList.toggle("show");
+  popup.onclick = (function() {
+    var popupElement = popup;
+    return function (){
+      popupElement.parentNode.removeChild(popupElement);
+    }
+  })();
+  popupList.appendChild(popup);
+
+}
+
+function addPoints(name, points) {
+	var point = new Object();
+	point.name = name;
+	point.points = points;
+
+	var pList = localStorage.getObj('pointHist');
+      pList.push(point);
+	localStorage.setObj('pointHist', pList);
+
+  var user = localStorage.getObj('user');
+  user[0].points = user[0].points + points;
+  if(user[0].points >= 100){
+    user[0].points = user[0].points - 100;
+    user[0].lvl = user[0].lvl + 1;
+    popupReward("LEVEL UP");
+  }
+  localStorage.setObj('user', user);
 }
