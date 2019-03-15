@@ -11,7 +11,7 @@ function init() {
 	localStorage.setObj('books', books);
 
 
- 
+
 	makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
 	makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []);
 
@@ -19,13 +19,25 @@ function init() {
 
 	localStorage.setObj('sums', "");
   }
-	
+
+  if(localStorage.getObj('pointHist') === null){
+	   localStorage.setObj('pointHist', badges);
+     localStorage.setObj('user', badges);
+
+     createUser("FILL_ME_IN", 4, 0);
+
+     addPoints("Read 25 pages", 20);
+	   addPoints("Start a new book", 25);
+     addPoints("3-day streak", 10);
+
+  }
+
 	updateBookLog();
 
 	loadDropdown();
 	loadDropdown2();
 	viewSummaries();
-	
+
 }
 
 
@@ -51,7 +63,7 @@ function viewSummaries(){
 		if (title == bList[i].title) {
 			var val = bList[i].summary;
 			var sums = "";
-			
+
 			if(val.length == 0){
 				sums = "No summary listed";
 			}else if (val[0] == ""){
@@ -61,27 +73,27 @@ function viewSummaries(){
 					sums += val[i];
 					sums += "\n";
 				}
-				
+
 			}
 			sumArea.innerHTML = sums;
 		}
 	}
-	
-	
+
+
 }
 
 
 function loadDropdown2(){
 	var dd = document.getElementById("title-dropdown-2");
 	var bList = localStorage.getObj('books');
-	
+
 	for (var i = (bList.length-1); i >= 0; i--) {
 		var o = document.createElement("option");
 		o.setAttribute("value", bList[i].title);
 		o.innerHTML = bList[i].title;
 		dd.appendChild(o)
 	}
-	
+
 
 }
 
@@ -172,6 +184,7 @@ function pgSubmit() {
 	}
 
 	localStorage.setObj('books', bList);
+
 	updateBookLog();
 	document.getElementById("form-log").reset();
 	localStorage.setObj('sums', "");
@@ -230,6 +243,11 @@ function submitLog() {
 	localStorage.setObj('books', bList);
 
 
+  var msg = "Added a summary";
+  addPoints(msg, 5);
+  msg = msg + " +5"
+  popupReward(msg);
+
    updateBookLog();
    document.getElementById("form-log").reset();
    localStorage.setObj('sums', "");
@@ -252,9 +270,54 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
 	localStorage.setObj('books', bList);
 }
 
+function createUser(name, lvl, points) {
+	var user = new Object();
+	user.name = name;
+  user.lvl = lvl;
+	user.points = points;
+
+	var userList = localStorage.getObj('user');
+      userList.push(user);
+	localStorage.setObj('user', userList);
+}
+
+function popupReward(msg) {
+  var popupList = document.getElementById("popupList");
+  var popup = document.createElement("span");
+  popup.setAttribute("class", "popuptext");
+  popup.innerHTML = msg;
+  popup.classList.toggle("show");
+  popup.onclick = (function() {
+    var popupElement = popup;
+    return function (){
+      popupElement.parentNode.removeChild(popupElement);
+    }
+  })();
+  popupList.appendChild(popup);
+
+}
+
+function addPoints(name, points) {
+	var point = new Object();
+	point.name = name;
+	point.points = points;
+
+	var pList = localStorage.getObj('pointHist');
+      pList.push(point);
+	localStorage.setObj('pointHist', pList);
+
+  var user = localStorage.getObj('user');
+  user[0].points = user[0].points + points;
+  if(user[0].points >= 100){
+    user[0].points = user[0].points - 100;
+    user[0].lvl = user[0].lvl + 1;
+    popupReward("LEVEL UP");
+  }
+  localStorage.setObj('user', user);
+}
 
 function signout(){
 	localStorage.clear();
 	window.open("login.html", "_top");
-	
+
 }
