@@ -25,7 +25,9 @@ function init() {
         localStorage.setObj('pointHist', badges);
         localStorage.setObj('user', badges);
 
-        createUser("FILL_ME_IN", 4, 0);
+        var usr = localStorage.getObj('username');
+        var pw = localStorage.getObj('password');
+        createUser(usr, 4, 0, pw);
 
         addPoints("Read 25 pages", 20);
         addPoints("Start a new book", 25);
@@ -54,6 +56,20 @@ function init() {
         addPastData("Ender's Game", 2, 67, 8, 6, 2018);
         addPastData("Ender's Game", 2, 53, 8, 5, 2018);
 
+    }
+
+    var found = false;
+    var user = localStorage.getObj('user');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+    for (var i = 0; i < user.length; i++) {
+        if (curUser == user[i].name) {
+          found = true;
+        }
+    }
+    if(!found){
+      var pw = localStorage.getObj('password');
+      createUser(curUser, 0, 0, pw);
     }
 
     updateBookLog();
@@ -201,7 +217,7 @@ function updateChartThisMonth() {
         options: {
             title: {
                 display: true,
-                text: 'Pages Read This Month',
+                text: 'Pages Read This Year',
                 fontSize: 20
             },
             legend: {
@@ -232,8 +248,13 @@ function updateBookLog() {
     }
 
     var bList = localStorage.getObj('books');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = (bList.length - 1); i >= 0; i--) {
+
+        if (curUser == bList[i].user) {
+        found = true;
 
         var li = document.createElement("li");
         var name = bList[i].title;
@@ -268,7 +289,10 @@ function updateBookLog() {
         li.appendChild(TN);
         li.appendChild(sum);
         ul.appendChild(li);
-    }
+
+      }
+      }
+
 
 
     updateChartThisMonth();
@@ -298,8 +322,12 @@ function pgSubmit() {
     var bList = localStorage.getObj('books');
     var newPages = 0;
 
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+
     for (var i = 0; i < bList.length; i++) {
         if (title == bList[i].title) {
+            if(curUser == bList[i].user){
             newPages = currPg - bList[i].pgNumber;
             bList[i].pgNumber = currPg;
             var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
@@ -311,7 +339,7 @@ function pgSubmit() {
             revs.push(rev);
             bList[i].review = revs;
             updateReviewLib(bList[i].title, rev);
-
+          }
         }
     }
 
@@ -390,8 +418,12 @@ function submitLog() {
 
     var newPages = 0;
 
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+
     for (var i = 0; i < bList.length; i++) {
         if (logForm[0] == bList[i].title) {
+          if(curUser == bList[i].user){
             if (logForm[2].length > 0) {
                 newPages = logForm[2] - bList[i].pgNumber;
                 bList[i].pgNumber = logForm[2];
@@ -408,6 +440,7 @@ function submitLog() {
             updateReviewLib(logForm[0], logForm[5]);
 
             existsFlag = true;
+          }
         }
     }
 
@@ -457,6 +490,9 @@ function submitLog() {
 
 function makeBook(title, author, pgNumber, timeSpent, finished, summary, review) {
     var book = new Object();
+
+    var username = localStorage.getItem('username');
+    book.user = username.replace(/"/g,"");
     book.title = title;
     book.author = author;
     book.pgNumber = pgNumber;
@@ -483,25 +519,39 @@ function makeBadge(name, points, descrip, progress) {
 
 function addPoints(name, points) {
     var point = new Object();
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+    var username = localStorage.getItem('username');
     point.name = name;
     point.points = points;
+    point.user = username.replace(/"/g,"");;
 
     var pList = localStorage.getObj('pointHist');
     pList.push(point);
     localStorage.setObj('pointHist', pList);
 
     var user = localStorage.getObj('user');
-    user[0].points = user[0].points + points;
-    if (user[0].points >= 100) {
-        user[0].points = user[0].points - 100;
-        user[0].lvl = user[0].lvl + 1;
-        popupReward("LEVEL UP");
-    }
+
+      for (var i = 0; i < user.length; i++) {
+          if (curUser == user[i].name) {
+            user[i].points = user[i].points + points;
+            if (user[i].points >= 100) {
+                user[i].points = user[i].points - 100;
+                user[i].lvl = user[i].lvl + 1;
+                popupReward("LEVEL UP");
+            }
+          }
+      }
+
+
     localStorage.setObj('user', user);
 }
 
 function addPastData(book, time, pages, day, month, year) {
     var dataPoint = new Object();
+    var username = localStorage.getItem('username');
+    username = username.replace(/"/g,"");
+    dataPoint.user = username.replace(/"/g,"");
     dataPoint.book = book;
     dataPoint.time = time;
     dataPoint.pages = pages;
@@ -517,16 +567,18 @@ function addPastData(book, time, pages, day, month, year) {
 
 function addData(book, time, pages) {
     var dataPoint = new Object();
+    var username = localStorage.getItem('username');
+    dataPoint.user = username.replace(/"/g,"");
     dataPoint.book = book;
-    dataPoint.time = parseFloat(time);
-    dataPoint.pages = parseInt(pages);
+    dataPoint.time = time;
+    dataPoint.pages = pages;
 
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
     dataPoint.day = dd;
-    dataPoint.month = mm;
+    dataPoint.week = mm;
     dataPoint.year = yyyy;
 
     var dataList = localStorage.getObj('history');
@@ -535,11 +587,12 @@ function addData(book, time, pages) {
 
 }
 
-function createUser(name, lvl, points) {
+function createUser(name, lvl, points, pw) {
     var user = new Object();
     user.name = name;
     user.lvl = lvl;
     user.points = points;
+    user.pw = pw;
 
     var userList = localStorage.getObj('user');
     userList.push(user);
@@ -567,17 +620,19 @@ function numPagesForDay(day, month, year) {
     var dataList = localStorage.getObj('history');
     var pages = 0;
 
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
     for (var i = 0; i < dataList.length; i++) {
-
-        if (dataList[i].day == day && dataList[i].month == month && dataList[i].year == year) {
-            pages = pages + dataList[i].pages;
-        }
-
+          if (curUser == dataList[i].user) {
+            if (dataList[i].day == day && dataList[i].month == month && dataList[i].year == year) {
+			           var pg = dataList[i].pages;
+                 pages = pages + pg;
+               }
+           }
     }
 
-    console.log(pages);
-    return pages;
 
+    return pages;
 }
 
 function numPagesForMonth(month, year) {
@@ -585,12 +640,15 @@ function numPagesForMonth(month, year) {
     var dataList = localStorage.getObj('history');
     var pages = 0;
 
-    for (var i = 0; i < dataList.length; i++) {
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
+    for (var i = 0; i < dataList.length; i++) {
+      if (curUser == dataList[i].user) {
         if (dataList[i].month == month && dataList[i].year == year) {
             pages = pages + dataList[i].pages;
         }
-
+      }
     }
 
     return pages;
@@ -696,5 +754,3 @@ function emptyStrings(arr) {
     }
     return true;
 }
-
-

@@ -43,12 +43,28 @@ function init() {
         localStorage.setObj('pointHist', badges);
         localStorage.setObj('user', badges);
 
-        createUser("FILL_ME_IN", 4, 0);
+        var usr = localStorage.getObj('username');
+        var pw = localStorage.getObj('password');
+        createUser(usr, 4, 0, pw);
 
         addPoints("Read 25 pages", 20);
         addPoints("Start a new book", 25);
         addPoints("3-day streak", 10);
 
+    }
+
+    var found = false;
+    var user = localStorage.getObj('user');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+    for (var i = 0; i < user.length; i++) {
+        if (curUser == user[i].name) {
+          found = true;
+        }
+    }
+    if(!found){
+      var pw = localStorage.getObj('password');
+      createUser(curUser, 0, 0, pw);
     }
 
     updateOptions();
@@ -62,11 +78,16 @@ function loadDropdown() {
     var dd = document.getElementById("title-dropdown");
     var bList = localStorage.getObj('books');
 
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+
     for (var i = (bList.length - 1); i >= 0; i--) {
+      if(bList[i].user == curUser){
         var o = document.createElement("option");
         o.setAttribute("value", bList[i].title);
         o.innerHTML = bList[i].title;
         dd.appendChild(o);
+      }
     }
 }
 
@@ -80,8 +101,11 @@ function updateOptions() {
     }
 
     var bList = localStorage.getObj('books');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = (bList.length - 1); i >= 0; i--) {
+      if(bList[i].user == curUser){
         var name = bList[i].title;
 
         var dropdown = document.getElementById("reviewDropdown");
@@ -89,7 +113,7 @@ function updateOptions() {
         option.innerHTML = name;
         option.value = name;
         dropdown.options.add(option);
-
+      }
     }
 
 
@@ -123,12 +147,18 @@ function subUpdateSim(title) {
     var dl = document.getElementById("lib-list");
     var selectedTitle = dl[dl.selectedIndex].value;
     var bList = localStorage.getObj('bookLib');
+
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+
     for (var i = (bList.length - 1); i >= 0; i--) {
+      if(curUser == bList[i].user){
         if (bList[i].title == selectedTitle) {
             var sim = bList[i].similar;
             sim.push(title);
             bList[i].similar = sim;
         }
+      }
     }
 
     localStorage.setObj('bookLib', bList);
@@ -153,6 +183,9 @@ function updateBookLib() {
 
     var selector = document.getElementById('reviewDropdown');
     var selectedTitle = selector[selector.selectedIndex].value;
+
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = (bList.length - 1); i >= 0; i--) {
 
@@ -202,7 +235,7 @@ function updateBookLib() {
             li.appendChild(TN);
             ul.appendChild(li);
 
-        }
+          }
     }
 
 
@@ -342,13 +375,17 @@ function pgSubmit() {
     var fin = document.getElementById("finish_new").checked;
 
     var bList = localStorage.getObj('bookLib');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = 0; i < bList.length; i++) {
         if (title == bList[i].title) {
+          if(curUser == bList[i].user){
             bList[i].pgNumber = currPg;
             var ts = parseFloat(bList[i].timeSpent) + parseFloat(newTime);
             bList[i].timeSpent = ts.toString();
         }
+      }
     }
 
     localStorage.setObj('bookLib', bList);
@@ -381,9 +418,12 @@ function submitLog() {
 
 
     var bList = localStorage.getObj('bookLib');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = 0; i < bList.length; i++) {
         if (title == bList[i].title) {
+          if(curUser == bList[i].user){
 
             if (bList[i].review.length > 0) {
                 bList[i].review = bList[i].review + "<br />" + review;
@@ -393,6 +433,7 @@ function submitLog() {
 
             bList[i].rating = (parseFloat(bList[i].rating) + parseFloat(rating)) / 2.0;
         }
+      }
     }
 
     localStorage.setObj('bookLib', bList);
@@ -425,24 +466,29 @@ function makeBookForLib(title, author, rating, review, similarBooks) {
     localStorage.setObj('bookLib', bList);
 }
 
-function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
+function makeBook(title, author, pgNumber, timeSpent, finished, summary, review) {
     var book = new Object();
+
+    var username = localStorage.getItem('username');
+    book.user = username.replace(/"/g,"");
     book.title = title;
     book.author = author;
     book.pgNumber = pgNumber;
     book.finished = finished;
     book.timeSpent = timeSpent;
     book.summary = summary;
+    book.review = review;
     var bList = localStorage.getObj('books');
     bList.push(book);
     localStorage.setObj('books', bList);
 }
 
-function createUser(name, lvl, points) {
+function createUser(name, lvl, points, pw) {
     var user = new Object();
     user.name = name;
     user.lvl = lvl;
     user.points = points;
+    user.pw = pw;
 
     var userList = localStorage.getObj('user');
     userList.push(user);
@@ -467,20 +513,30 @@ function popupReward(msg) {
 
 function addPoints(name, points) {
     var point = new Object();
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+    var username = localStorage.getItem('username');
     point.name = name;
     point.points = points;
+    point.user = username.replace(/"/g,"");;
 
     var pList = localStorage.getObj('pointHist');
     pList.push(point);
     localStorage.setObj('pointHist', pList);
 
     var user = localStorage.getObj('user');
-    user[0].points = user[0].points + points;
-    if (user[0].points >= 100) {
-        user[0].points = user[0].points - 100;
-        user[0].lvl = user[0].lvl + 1;
-        popupReward("LEVEL UP");
-    }
+
+      for (var i = 0; i < user.length; i++) {
+          if (curUser == user[i].name) {
+            user[i].points = user[i].points + points;
+            if (user[i].points >= 100) {
+                user[i].points = user[i].points - 100;
+                user[i].lvl = user[i].lvl + 1;
+                popupReward("LEVEL UP");
+            }
+          }
+      }
+
     localStorage.setObj('user', user);
 }
 
@@ -490,5 +546,3 @@ function signout() {
     window.open("login.html", "_top");
 
 }
-
-

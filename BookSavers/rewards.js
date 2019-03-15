@@ -41,6 +41,21 @@ function init() {
 
     }
 
+    var found = false;
+    var user = localStorage.getObj('user');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+
+    for (var i = 0; i < user.length; i++) {
+        if (curUser == user[i].name) {
+          found = true;
+        }
+    }
+    if(!found){
+      var pw = localStorage.getObj('password');
+      createUser(curUser, 0, 0, pw);
+    }
+
     updateBadges();
     updateRewardsTable();
 
@@ -120,10 +135,14 @@ function updateRewardsTable() {
     ul.appendChild(li);
 
     var bList = localStorage.getObj('pointHist');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     var count = 0;
 
     for (var i = (bList.length - 1); i >= 0; i--) {
+
+      if(curUser == bList[i].user){
 
         var li = document.createElement("li");
         var name = bList[i].name;
@@ -144,6 +163,7 @@ function updateRewardsTable() {
         }
 
     }
+  }
 
 
 
@@ -235,8 +255,11 @@ function submitLog() {
     logForm.push(sums)
     var existsFlag = false;
     var bList = localStorage.getObj('books');
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
 
     for (var i = 0; i < bList.length; i++) {
+      if(curUser == bList[i].user){
         if (logForm[0] == bList[i].title) {
             if (logForm[2].length > 0) {
                 bList[i].pgNumber = logForm[2];
@@ -253,6 +276,7 @@ function submitLog() {
             }
             existsFlag = true;
         }
+      }
     }
 
     localStorage.setObj('books', bList);
@@ -270,14 +294,18 @@ function submitLog() {
 }
 
 
-function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
+function makeBook(title, author, pgNumber, timeSpent, finished, summary, review) {
     var book = new Object();
+
+    var username = localStorage.getItem('username');
+    book.user = username.replace(/"/g,"");
     book.title = title;
     book.author = author;
     book.pgNumber = pgNumber;
     book.finished = finished;
     book.timeSpent = timeSpent;
     book.summary = summary;
+    book.review = review;
     var bList = localStorage.getObj('books');
     bList.push(book);
     localStorage.setObj('books', bList);
@@ -297,21 +325,32 @@ function makeBadge(name, points, descrip, progress) {
 
 function addPoints(name, points) {
     var point = new Object();
+    var curUser = localStorage.getItem('username');
+    curUser = curUser.replace(/"/g,"");
+    var username = localStorage.getItem('username');
     point.name = name;
     point.points = points;
+    point.user = username.replace(/"/g,"");;
 
     var pList = localStorage.getObj('pointHist');
     pList.push(point);
     localStorage.setObj('pointHist', pList);
 
     var user = localStorage.getObj('user');
-    user[0].points = user[0].points + points;
-    if (user[0].points >= 100) {
-        user[0].points = user[0].points - 100;
-        user[0].lvl = user[0].lvl + 1;
-        popupReward("LEVEL UP");
-    }
-    localStorage.setObj('user', user)
+
+      for (var i = 0; i < user.length; i++) {
+          if (curUser == user[i].name) {
+            user[i].points = user[i].points + points;
+            if (user[i].points >= 100) {
+                user[i].points = user[i].points - 100;
+                user[i].lvl = user[i].lvl + 1;
+                popupReward("LEVEL UP");
+            }
+          }
+      }
+
+
+    localStorage.setObj('user', user);
 }
 
 function createUser(name, lvl, points, pw) {
@@ -332,5 +371,3 @@ function signout() {
     window.open("login.html", "_top");
 
 }
-
-
