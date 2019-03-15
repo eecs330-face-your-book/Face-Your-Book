@@ -33,6 +33,7 @@ label {
 
 #form-log {
  float: left;
+ margin-left: 5%;
 }
 
 #form-log select{
@@ -119,7 +120,7 @@ button {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 3%;
+ margin-left: 5%;
  border-radius: 1em;
 }
 
