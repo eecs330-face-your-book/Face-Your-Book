@@ -36,14 +36,15 @@ label {
   margin-bottom: 2%;
 }
 
-
+.leftBox{
+	float: left;
+}
 .recList {
  border: 1px solid #000000;
  width: 300px;
  background-color: #3B8BEB;
- float: left;
  margin-left: 5%;
-
+ float: left;
  border-radius: 1em;
 }
 
@@ -66,16 +67,34 @@ label {
 	margin-left: 7%;
 	margin-right: 5%;
 }
+.plot p{
+	margin-left: 7%;
+	margin-right: 5%;
+}
 
+.plot {
+ border: 1px solid #000000;
+ width: 300px;
+ background-color: #3B8BEB;
+ margin-left: 5%;
+
+ border-radius: 1em;
+}
+
+.plot h1 {
+
+ font-size: 21px;
+ margin-left: 30px;
+}
 
 
 .rewardNext {
  border: 1px solid #000000;
  width: 300px;
  background-color: #3B8BEB;
- float: left;
  margin-left: 5%;
  border-radius: 1em;
+ margin-bottom: 5%;
 }
 
 .rewardNext p{
