@@ -19,12 +19,13 @@ function init() {
 
 	localStorage.setObj('sums', "");
   }
-
+	
 	updateBookLog();
 
 	loadDropdown();
 	loadDropdown2();
 	viewSummaries();
+	
 }
 
 
@@ -50,17 +51,23 @@ function viewSummaries(){
 		if (title == bList[i].title) {
 			var val = bList[i].summary;
 			var sums = "";
+			
 			if(val.length == 0){
 				sums = "No summary listed";
-			}else{
+			}else if (val[0] == ""){
+				sums = "No summary listed";
+			}else {
 				for(var i=0; i < val.length; i++){
 					sums += val[i];
 					sums += "\n";
 				}
+				
 			}
 			sumArea.innerHTML = sums;
 		}
 	}
+	
+	
 }
 
 
@@ -243,4 +250,11 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
 	var bList = localStorage.getObj('books');
       bList.push(book);
 	localStorage.setObj('books', bList);
+}
+
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
 }

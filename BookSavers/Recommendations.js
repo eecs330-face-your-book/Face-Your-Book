@@ -483,3 +483,10 @@ function addPoints(name, points) {
   }
   localStorage.setObj('user', user);
 }
+
+
+function signout(){
+	localStorage.clear();
+	window.open("login.html", "_top");
+	
+}
