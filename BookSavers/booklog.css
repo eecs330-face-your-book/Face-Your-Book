@@ -92,7 +92,7 @@ button {
  width: 300px;
  background-color: #3B8BEB;
  float: left;
- margin-left: 30%;
+ margin-left: 7%;
  border-radius: 1em;
 }
 
@@ -278,6 +278,10 @@ button {
   margin-bottom: 1px;
 }
 
+#plot {
+	margin-left: 5%;
+}
+
 /* Toggle this class - hide and show the popup */
 .popup .show {
   visibility: visible;
@@ -304,6 +308,12 @@ button {
   height: 0;
   z-index: 2;
 
+}
+
+#form-log {
+	margin-right: 0;
+	margin-left: 7%;
+	float:left;
 }
 
 #reviewbox {
