@@ -49,7 +49,7 @@ function init() {
 function updateBadges() {
 
     var ul = document.getElementById("badgeHist");
-
+	ul.setAttribute("style", "list-style-type: none;");
     while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
     }
@@ -86,6 +86,7 @@ function updateBadges() {
 function updateRewardsTable() {
 
     var ul = document.getElementById("rewardsHist");
+	ul.setAttribute("style", "list-style-type: none;");
 
     while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
