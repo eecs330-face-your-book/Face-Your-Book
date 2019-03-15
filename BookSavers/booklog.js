@@ -309,9 +309,9 @@ function pgSubmit() {
 
 			bList[i].summary.push(sums);
 			var revs = bList[i].review;
-			console.log(revs);
 			revs.push(rev);
 			bList[i].review = revs;
+			updateReviewLib(bList[i].title, rev);
 
 		}
 	}
@@ -382,7 +382,6 @@ function submitLog() {
 
 	}
 
-	console.log(logForm);
 	var sums = localStorage.getObj('sums')
     logForm.push(sums)
 	var existsFlag = false;
@@ -405,7 +404,7 @@ function submitLog() {
 
 			bList[i].summary.push(logForm[6]);
 			bList[i].review.push(logForm[5]);
-			//updateReviewLib(bList[i].title, logForm[6]);
+			updateReviewLib(logForm[0], logForm[5]);
 
 			existsFlag = true;
 		}
@@ -418,6 +417,7 @@ function submitLog() {
 	if(!existsFlag){
 
 		makeBook(logForm[0], logForm[1], logForm[2], logForm[3], logForm[4], sumArr, [logForm[5]]);
+		updateReviewLib(logform[0], logForm[5]);
 
     newPages = logForm[2];
 
@@ -622,4 +622,16 @@ function displayReview2(){
 	}else{
 		document.getElementById("reviewbox2").style.display = "none";
 	}
+}
+
+function updateReviewLib(title, review){
+	var bLib = localStorage.getObj('bookLib');
+	
+	for(var i=0; i<bLib.length; i++){
+		if(bLib[i].title == title){
+			bLib[i].review = bLib[i].review + "</br>" + review;
+		}
+	}
+	
+	localStorage.setObj("bookLib", bLib);
 }
