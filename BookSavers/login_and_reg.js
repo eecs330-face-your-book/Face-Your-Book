@@ -36,9 +36,10 @@ function submitRegister(){
        window.open("Dashboard.html", "_top");
      //document.getElementById('welcomeMessage').innerHTML = "Welcome " + localStorage.getItem('username') + "!";
       } 
-	   //else {
+	   else {
+		   document.getElementById('errorMsg').innerHTML = "Invalid Log-in!";
 	     
      //document.getElementById('welcomeMessage').innerHTML = "Invalid Log-in!";
-    //}
+    }
     return false;
    } // end login()

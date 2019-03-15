@@ -4,9 +4,9 @@
 	text-align: left;
 	padding-left: 30px;
 
-	font-size: 40px;
+	font-size: 20px;
 	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-bottom: 0%;
 }
 
 p {
@@ -14,7 +14,7 @@ p {
 }
 
 #text {
-	padding: 10%;
+	padding-left: 10%;
 	margin-right: 40%;
 }
 
@@ -28,7 +28,7 @@ p {
 	border: 1px solid #000000;
 }
 
-input {
+.inputs {
  background-color: #E7E3D4;
  color: black;
 
@@ -36,4 +36,18 @@ input {
 	margin-top: 2%;
 	width: 150%;
 
+}
+
+#submit {
+	background-color: #8590AA;
+	width: 150%;
+}
+
+a {
+	color: black;
+}
+
+#errorMsg {
+	color: #B23850;
+	margin-left: 10%;
 }

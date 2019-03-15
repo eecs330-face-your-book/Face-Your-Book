@@ -11,19 +11,15 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="login_and_reg.js"></script>
 
-      <div class="header">
-         <div id = "logo">
-            <img src="images/logo3.png">
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <ul class="nav navbar-nav">
+				<li><div id = "logo">
+            <img src="images/logo8.png">
+         </div></li>
+            </ul>
          </div>
-         <div id="logo">
-            <div class="user_button">
-               <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
-                  <span class="caret"></span></button>
-               </div>
-            </div>
-         </div>
-
+      </nav>
     <form method="get" action="" onsubmit="return store(this);" id-"register">
 	    <fieldset>
       <div class="loginbox">
@@ -32,14 +28,14 @@
 	 <p id = "text">
 
 	 <label for="username">Username:</label>
-	 <input type = "text" id="username" required value= ""/>
+	 <input type = "text" class="inputs" id="username" required value= ""/>
 	 </p>
 	 <p id="text"> 
 	 <label for="password">Password:</label>
-	 <input type = "password" id="password" required value = ""/>
+	 <input type = "password" class="inputs" id="password" required value = ""/>
 	 </p>
 	 <p id = "text"> 
-	 <input type="submit" value="Register"/>
+	 <input type="submit" id="submit" value="Register"/>
 	 <!--button type="button" id="submit" onclick="store(this)">Submit</button-->
 	 </p>
 	    </fieldset>
