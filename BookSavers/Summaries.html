@@ -10,90 +10,87 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="summaries.js"></script>
-
       <nav class="navbar navbar-default">
          <div class="container-fluid">
             <ul class="nav navbar-nav">
-				<li><div id = "logo">
-            <img src="images/logo8.png">
-         </div></li>
+               <li>
+                  <div id = "logo">
+                     <img src="images/logo8.png">
+                  </div>
+               </li>
                <li><a href="dashboard.html">Dashboard</a></li>
                <li><a href="BookLog.html">Book Log</a></li>
                <li class="active"><a href="Summaries.html">Summaries</a></li>
                <li><a href="Recommendations.html">Find a New Book</a></li>
                <li><a href="rewards.html">MyRewards</a></li>
-			   <li><div class="user_button">
-               <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
-		     <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">About Us</a></li>
-                     <li role="presentation" class="divider"></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signout()">Sign Out</a></li>
-                  </ul>
-               </div>
-
-            </div></li>
-
+               <li>
+                  <div class="user_button">
+                     <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">About Us</a></li>
+                           <li role="presentation" class="divider"></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signout()">Sign Out</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </li>
             </ul>
          </div>
       </nav>
-
       <div class="popup">
-        <ul class="inv" id="popupList">
-        </ul>
+         <ul class="inv" id="popupList">
+         </ul>
       </div>
-
-	  <div class="last-sum">
-         <form id="last-sum">
-            <fieldset>
-               <legend>View Summaries</legend>
-			   <p>Select a title to view the summaries for that book.</p>
-               <div>
-                  <label for="title">Title:</label>
-                  <select name="title" id="title-dropdown-2" onchange="viewSummaries()">
-				  </select>
-               </div>
-				<div>
-					<label for="summary">Summary:</label>
-					<textarea name="summary" rows="8" cols="48" id="last-summary-text"></textarea>
-            </fieldset>
-         </form>
+      <div class="last-sum">
+      <form id="last-sum">
+         <fieldset>
+            <legend>View Summaries</legend>
+            <p>Select a title to view the summaries for that book.</p>
+            <div>
+               <label for="title">Title:</label>
+               <select name="title" id="title-dropdown-2" onchange="viewSummaries()">
+               </select>
+            </div>
+            <div>
+               <label for="summary">Summary:</label>
+               <textarea name="summary" rows="8" cols="48" id="last-summary-text"></textarea>
+         </fieldset>
+      </form>
       </div>
-	  <div>
-		<form class="summary-display" id="sum-display">
+      <div>
+         <form class="summary-display" id="sum-display">
             <h1>Summary</h1>
-			<p id="sumdisplay-text">Default text</p>
-			<button id="closeSum" onclick="closeSummary()">Close</button>
+            <p id="sumdisplay-text">Default text</p>
+            <button id="closeSum" onclick="closeSummary()">Close</button>
          </form>
-
-	  </div>
+      </div>
       <div class="bookLog">
-	<h1>Book Log</h1>
-        <ul id="bookLogList">
-
-        </ul>
+         <h1>Book Log</h1>
+         <ul id="bookLogList">
+         </ul>
       </div>
       <div class="log_form">
-         <form id="form-log">
-            <fieldset>
-               <legend>Add a Summary</legend>
-			   <p>Create a new summary for a book that is listed in the book log.</p>
-               <div>
-                  <label for="title">Title:</label>
-                  <select name="title" id="title-dropdown" >
-				  </select>
-               </div>
-				<div>
-					<label for="summary">Input summary:</label>
-					<textarea name="summary" rows="8" cols="48" id="add-summary-text"></textarea>
+      <form id="form-log">
+         <fieldset>
+            <legend>Add a Summary</legend>
+            <p>Create a new summary for a book that is listed in the book log.</p>
+            <div>
+               <label for="title">Title:</label>
+               <select name="title" id="title-dropdown" >
+               </select>
+            </div>
+            <div>
+               <label for="summary">Input summary:</label>
+               <textarea name="summary" rows="8" cols="48" id="add-summary-text"></textarea>
                <div>
                   <button type="button" id="submit" onclick="submitLog()">Submit</button>
                </div>
-            </fieldset>
-         </form>
+         </fieldset>
+      </form>
       </div>
       <div class="form-popup" id="myForm">
          <form class="form-container">
@@ -103,7 +100,7 @@
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
          </form>
       </div>
-	  <div class="pg-popup" id="update-pages">
+      <div class="pg-popup" id="update-pages">
       <form class="pgform-container">
          <h1>
             Update information for 
@@ -131,8 +128,5 @@
          <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
       </form>
       </div>
-
-
-
    </body>
 </html>

@@ -1,28 +1,28 @@
 form {
-  float: left;
-  /* Just to center the form on the page */
-  margin: 0 auto;
-  width: 400px;
-  /* To see the outline of the form */
-  padding: 1em;
-  border: 1px solid #000000;
-  border-radius: 1em;
-  background-color: #3B8BEB;
+	float: left;
+	/* Just to center the form on the page */
+	margin: 0 auto;
+	width: 400px;
+	/* To see the outline of the form */
+	padding: 1em;
+	border: 1px solid #000000;
+	border-radius: 1em;
+	background-color: #3B8BEB;
 }
 
 legend {
-  border-color: #000000;
+	border-color: #000000;
 }
 
-form div + div {
-  margin-top: 1em;
+form div+div {
+	margin-top: 1em;
 }
 
 label {
-  /* To make sure that all labels have the same size and are properly aligned */
-  display: inline-block;
-  width: 188px;
-  text-align: left;
+	/* To make sure that all labels have the same size and are properly aligned */
+	display: inline-block;
+	width: 188px;
+	text-align: left;
 }
 
 #update-pw {
@@ -30,70 +30,78 @@ label {
 	margin-left: 33%;
 }
 
-#update-pw input{
-  background-color: #E7E3D4;
-  margin-bottom: 2%;
+#update-pw input {
+	background-color: #E7E3D4;
+	margin-bottom: 2%;
 }
-
 
 .popup {
-
-  float: right;
-  margin-right: 10%;
-
-
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	float: right;
+	margin-right: 10%;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
+
 
 /* The actual popup */
+
 .popuptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: #8590AA;
-  color: #E7E3D4;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  /*position: absolute;*/
-  z-index: 2;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-  margin-bottom: 1px;
+	visibility: hidden;
+	width: 200px;
+	background-color: #8590AA;
+	color: #E7E3D4;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	/*position: absolute;*/
+	z-index: 2;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+	margin-bottom: 1px;
 }
+
 
 /* Toggle this class - hide and show the popup */
+
 .popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+	animation: fadeIn 1s;
 }
 
+
 /* Add animation (fade in the popup) */
+
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .inv {
-
-  margin-top: : 5%;
-  margin-bottom: 0px;
-  width: 0;
-  height: 0;
-  z-index: 2;
-
+	margin-top: : 5%;
+	margin-bottom: 0px;
+	width: 0;
+	height: 0;
+	z-index: 2;
 }
 
 #curErr {
