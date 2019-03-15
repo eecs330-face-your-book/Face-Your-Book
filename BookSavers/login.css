@@ -1,9 +1,6 @@
-
 #login {
-
 	text-align: left;
 	padding-left: 30px;
-
 	font-size: 20px;
 	padding-top: 30px;
 	padding-bottom: 0%;
@@ -11,6 +8,15 @@
 
 .aboutus {
 	margin-right: 5%;
+}
+
+.aboutusbox {
+	margin-left: 31.5%;
+	margin-top: 50px;
+	width: 40%;
+	background-color: #3B8BEB;
+	border-radius: 1em;
+	border: 1px solid #000000;
 }
 
 p {
@@ -23,7 +29,6 @@ p {
 }
 
 .loginbox {
-
 	margin-left: 37.5%;
 	margin-top: 50px;
 	width: 25%;
@@ -33,13 +38,11 @@ p {
 }
 
 .inputs {
- background-color: #E7E3D4;
- color: black;
-
+	background-color: #E7E3D4;
+	color: black;
 	margin-left: 3%;
 	margin-top: 2%;
 	width: 150%;
-
 }
 
 #submit {

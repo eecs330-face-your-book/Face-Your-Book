@@ -1,22 +1,22 @@
 form {
-  float: left;
-  /* Just to center the form on the page */
-  margin: 0 auto;
-  margin-left: 20;
-  width: 400px;
-  /* To see the outline of the form */
-  padding: 1em;
-  border: 1px solid #000000;
-  border-radius: 1em;
-  background-color: #3B8BEB;
+	float: left;
+	/* Just to center the form on the page */
+	margin: 0 auto;
+	margin-left: 20;
+	width: 400px;
+	/* To see the outline of the form */
+	padding: 1em;
+	border: 1px solid #000000;
+	border-radius: 1em;
+	background-color: #3B8BEB;
 }
 
 legend {
-  border-color: #000000;
+	border-color: #000000;
 }
 
-form div + div {
-  margin-top: 1em;
+form div+div {
+	margin-top: 1em;
 }
 
 #reviewbox2 {
@@ -34,28 +34,28 @@ form div + div {
 }
 
 label {
-  /* To make sure that all labels have the same size and are properly aligned */
-  display: inline-block;
-  width: 188px;
-  text-align: left;
+	/* To make sure that all labels have the same size and are properly aligned */
+	display: inline-block;
+	width: 188px;
+	text-align: left;
 }
 
-#check-label{
+#check-label {
 	width: 145px;
 	font-size: 1.1em;
 }
 
 #form-log {
- float: left;
- margin-left: 5%;
+	float: left;
+	margin-left: 5%;
 }
 
-#form-log select{
+#form-log select {
 	background-color: #E7E3D4;
 	border: 1px solid #999;
 }
 
-#form-log option{
+#form-log option {
 	border: 1px solid black;
 }
 
@@ -64,9 +64,9 @@ label {
 	margin-left: 3%;
 }
 
-#last-sum textarea{
-  background-color: #E7E3D4;
-  margin-bottom: 2%;
+#last-sum textarea {
+	background-color: #E7E3D4;
+	margin-bottom: 2%;
 }
 
 #last-sum select {
@@ -74,126 +74,142 @@ label {
 }
 
 input {
-  /* To make sure that all text fields have the same font settings
+	/* To make sure that all text fields have the same font settings
      By default, textareas have a monospace font */
-  font: 1em sans-serif;
-
-  /* To give the same size to all text fields */
-  width: 375px;
-  box-sizing: border-box;
-
-  /* To harmonize the look & feel of text field border */
-  border: 1px solid #999;
-  background-color: #E7E3D4;
- color: black;
+	font: 1em sans-serif;
+	/* To give the same size to all text fields */
+	width: 375px;
+	box-sizing: border-box;
+	/* To harmonize the look & feel of text field border */
+	border: 1px solid #999;
+	background-color: #E7E3D4;
+	color: black;
 }
 
-#form-log textarea{
-  background-color: #E7E3D4;
-  margin-bottom: 2%;
+#form-log textarea {
+	background-color: #E7E3D4;
+	margin-bottom: 2%;
 }
 
 input:focus {
-  /* To give a little highlight on active elements */
-  border-color: #000;
+	/* To give a little highlight on active elements */
+	border-color: #000;
 }
 
-input[type="checkbox"]{
-  width: 20px;
+input[type="checkbox"] {
+	width: 20px;
 }
 
 .button {
-  /* To position the buttons to the same position of the text fields */
-  padding-left: 90px; /* same size as the label elements */
+	/* To position the buttons to the same position of the text fields */
+	padding-left: 90px;
+	/* same size as the label elements */
 }
 
 button {
-  /* This extra margin represent roughly the same space as the space
+	/* This extra margin represent roughly the same space as the space
      between the labels and their text fields */
-  margin-left: .5em;
-  font-weight: bold;
-  margin-right: 1em;
+	margin-left: .5em;
+	font-weight: bold;
+	margin-right: 1em;
 }
+
 #submit {
-  margin-left: 130px;
+	margin-left: 130px;
 }
- {box-sizing: border-box;}
+
+{
+	box-sizing: border-box;
+}
 
 
 /* The popup form - hidden by default */
+
 .form-popup {
-  display: none;
-  position: relative;
-  left: 30%;
-  bottom: 20%;
-  z-index: 9;
+	display: none;
+	position: relative;
+	left: 30%;
+	bottom: 20%;
+	z-index: 9;
 }
 
 .bookLog {
- border: 1px solid #000000;
- width: 300px;
- background-color: #3B8BEB;
- float: left;
- margin-left: 5%;
- border-radius: 1em;
+	border: 1px solid #000000;
+	width: 300px;
+	background-color: #3B8BEB;
+	float: left;
+	margin-left: 5%;
+	border-radius: 1em;
 }
 
 .bookLog h1 {
-
- font-size: 21px;
- margin-left: 30px;
+	font-size: 21px;
+	margin-left: 30px;
 }
 
 
 /* Add styles to the form container */
+
 .form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: #B23850	;
+	max-width: 300px;
+	padding: 10px;
+	background-color: #B23850;
 }
 
+
 /* Full-width input fields */
-.form-container h1{
+
+.form-container h1 {
 	font-size: 21px;
 }
 
-/* When the inputs get focus, do something */
-.form-container textarea:focus{
-  border-color: #000;
-}
 
 /* When the inputs get focus, do something */
-.form-container textarea{
-  background-color: #E7E3D4;
 
+.form-container textarea:focus {
+	border-color: #000;
 }
+
+
+/* When the inputs get focus, do something */
+
+.form-container textarea {
+	background-color: #E7E3D4;
+}
+
 
 /* Set a style for the submit/login button */
+
 .form-container .btn {
-  background-color: #C4DBF6 ;
-  color: black;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-  margin-top: 5%;
-  margin-left: 0;
-  margin-bottom: 0;
+	background-color: #C4DBF6;
+	color: black;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 10px;
+	opacity: 0.8;
+	margin-top: 5%;
+	margin-left: 0;
+	margin-bottom: 0;
 }
+
 
 /* Add a red background color to the cancel button */
+
 .form-container .cancel {
-  background-color: #8590AA;
-  color: white;
+	background-color: #8590AA;
+	color: white;
 }
+
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
+
+.form-container .btn:hover,
+.open-button:hover {
+	opacity: 1;
 }
 
-.summary-display{
+.summary-display {
 	z-index: 30;
 	border-radius: 1em;
 	border: 1px solid #000000;
@@ -203,146 +219,162 @@ button {
 	margin-top: 7%;
 	position: fixed;
 	display: none;
-
-
-
 }
 
-.summary-display h1{
+.summary-display h1 {
 	font-size: 21px;
 	margin-top: 5%;
 	margin-left: 30px;
 }
 
-.summary-display p{
-	 margin-left: 25px;
-	 padding-top: 5px;
-	 border-radius: 1em;
-	 border: 1px solid #000000;
-	 background-color: #E7E3D4;
-	 padding-left: 25px;
-	 margin-right: 5%;
-	 position: relative;
-
+.summary-display p {
+	margin-left: 25px;
+	padding-top: 5px;
+	border-radius: 1em;
+	border: 1px solid #000000;
+	background-color: #E7E3D4;
+	padding-left: 25px;
+	margin-right: 5%;
+	position: relative;
 }
 
-.summary-display button{
+.summary-display button {
 	margin-left: 40%;
 	margin-bottom: 2%;
 }
 
+
 /* The popup form - hidden by default */
+
 .pg-popup {
-  display: none;
-  position: relative;
-  left: 30%;
-  bottom: 20%;
-  z-index: 9;
+	display: none;
+	position: relative;
+	left: 30%;
+	bottom: 20%;
+	z-index: 9;
 }
 
 
 /* Add styles to the form container */
+
 .pgform-container {
-  max-width: 300px;
-  padding-left: 3%;
-  background-color: #B23850	;
+	max-width: 300px;
+	padding-left: 3%;
+	background-color: #B23850;
 }
+
 
 /* Full-width input fields */
-.pgform-container h1{
+
+.pgform-container h1 {
 	font-size: 21px;
 }
-
 
 .pgform-container input {
 	width: 90%;
 }
 
-.pgform-container input[type="checkbox"]{
-  width: 10%;
+.pgform-container input[type="checkbox"] {
+	width: 10%;
 }
+
 
 /* Set a style for the submit/login button */
+
 .pgform-container .btn {
-  background-color: #C4DBF6 ;
-  color: black;
-  border: none;
-  cursor: pointer;
-  width: 90%;
-  margin-bottom:10px;
-  opacity: 0.8;
-  margin-top: 5%;
-  margin-left: 0;
-  margin-bottom: 0;
+	background-color: #C4DBF6;
+	color: black;
+	border: none;
+	cursor: pointer;
+	width: 90%;
+	margin-bottom: 10px;
+	opacity: 0.8;
+	margin-top: 5%;
+	margin-left: 0;
+	margin-bottom: 0;
 }
+
 
 /* Add a red background color to the cancel button */
+
 .pgform-container .cancel {
-  background-color: #8590AA;
-  color: white;
+	background-color: #8590AA;
+	color: white;
 }
 
+
 /* Add some hover effects to buttons */
-.pgform-container .btn:hover, .open-button:hover {
-  opacity: 1;
+
+.pgform-container .btn:hover,
+.open-button:hover {
+	opacity: 1;
 }
 
 .popup {
-
-  float: right;
-  margin-right: 10%;
-
-
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	float: right;
+	margin-right: 10%;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
+
 
 /* The actual popup */
+
 .popuptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: #8590AA;
-  color: #E7E3D4;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  /*position: absolute;*/
-  z-index: 2;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-  margin-bottom: 1px;
+	visibility: hidden;
+	width: 200px;
+	background-color: #8590AA;
+	color: #E7E3D4;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	/*position: absolute;*/
+	z-index: 2;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+	margin-bottom: 1px;
 }
+
 
 /* Toggle this class - hide and show the popup */
+
 .popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+	animation: fadeIn 1s;
 }
 
+
 /* Add animation (fade in the popup) */
+
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .inv {
-
-  margin-top: : 5%;
-  margin-bottom: 0px;
-  width: 0;
-  height: 0;
-  z-index: 2;
-
+	margin-top: : 5%;
+	margin-bottom: 0px;
+	width: 0;
+	height: 0;
+	z-index: 2;
 }
