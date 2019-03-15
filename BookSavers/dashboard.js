@@ -13,8 +13,8 @@ function init() {
         localStorage.setObj('books', books);
 
 
-        makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"]);
-        makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, []);
+        makeBook("Game of Thrones", "George R R Martin", "242", "6", true, ["test summary"], []);
+        makeBook("Ender's Game", "Orson Scott Card", "242", "1.5", false, [], []);
 
 
         localStorage.setObj('sums', "");
@@ -314,7 +314,7 @@ function viewSummaries(){
 
 }
 
-function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
+function makeBook(title, author, pgNumber, timeSpent, finished, summary, review) {
     var book = new Object();
     book.title = title;
     book.author = author;
@@ -322,6 +322,7 @@ function makeBook(title, author, pgNumber, timeSpent, finished, summary) {
     book.finished = finished;
     book.timeSpent = timeSpent;
     book.summary = summary;
+	book.review = review;
     var bList = localStorage.getObj('books');
     bList.push(book);
     localStorage.setObj('books', bList);
