@@ -104,24 +104,32 @@
          </form>
       </div>
 	  <div class="pg-popup" id="update-pages">
-         <form class="pgform-container">
-            <h1>Update information for <div id="pg-title"></div/></h1>
-            <div>
-                  <label for="curr_pg">Current Page:</label>
-                  <input type="text" name="curr_pg" id="curr_pg_new">
-               </div>
-               <div>
-                  <label for="time_spent">Time Spent (in hours): </label>
-                  <input type="text" name="time_spent" id="time_spent_new">
-               </div>
-			   <div>
-					<label for="finished" id="check-label">Finished the Book?</label>
-                  <input type="checkbox" name="finished" id="finish_new">
-               </div>
-			<button type="button" onclick="updateSummary()">Add a Summary</button>
-            <button type="button" class="btn" onclick="pgSubmit()">Done</button>
-            <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
-         </form>
+      <form class="pgform-container">
+         <h1>
+            Update information for 
+            <div id="pg-title">
+               </div/>
+         </h1>
+         <div>
+         <label for="curr_pg">Current Page:<span id="pg_error2" class="errMsg2"></span></label>
+         <input type="text" name="curr_pg" id="curr_pg_new" onfocusout="validatePg2()">
+         </div>
+         <div>
+         <label for="time_spent">Time Spent (in hours):<span id="time_error2" class="errMsg2"></span></label>
+         <input type="text" name="time_spent" id="time_spent_new" onfocusout="validateTime2()">
+         </div>
+         <div>
+         <label for="finished" id="check-label">Finished the Book?</label>
+         <input type="checkbox" name="finished" id="finish_new" onclick="displayReview2()">
+         </div>
+         <div id="reviewbox2">
+         <label for="review">Input review:</label>
+         <textarea name="review" rows="8" cols="28" id="add-review-text2"></textarea>
+         </div>
+         <button type="button" onclick="openForm()">Add a Summary</button>
+         <button type="button" class="btn" onclick="pgSubmit()">Done</button>
+         <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
+      </form>
       </div>
 
 

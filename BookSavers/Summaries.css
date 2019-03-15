@@ -19,6 +19,20 @@ form div + div {
   margin-top: 1em;
 }
 
+#reviewbox2 {
+	display: none;
+}
+
+#add-review-text2 {
+	background-color: #E7E3D4;
+	margin-bottom: 4%;
+}
+
+.errMsg2 {
+	font-weight: normal;
+	color: white;
+}
+
 label {
   /* To make sure that all labels have the same size and are properly aligned */
   display: inline-block;

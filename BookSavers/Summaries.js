@@ -167,6 +167,7 @@ function pgSubmit() {
 	var currPg = document.getElementById("curr_pg_new").value;
 	var newTime = document.getElementById("time_spent_new").value;
 	var fin = document.getElementById("finish_new").checked;
+	var rev = document.getElementById("add-review-text2").value;
 	var sums = localStorage.getObj('sums')
 
 	var bList = localStorage.getObj('books');
@@ -179,6 +180,10 @@ function pgSubmit() {
 			bList[i].finished = fin;
 
 			bList[i].summary.push(sums);
+			var revs = bList[i].review;
+			revs.push(rev);
+			bList[i].review = revs;
+			updateReviewLib(bList[i].title, rev);
 
 		}
 	}
@@ -188,6 +193,7 @@ function pgSubmit() {
 	updateBookLog();
 	document.getElementById("form-log").reset();
 	localStorage.setObj('sums', "");
+	document.getElementById("reviewbox2").style.display = "none";
 }
 
 function displaySummary(ind){
@@ -320,4 +326,53 @@ function signout(){
 	localStorage.clear();
 	window.open("login.html", "_top");
 
+}
+
+function validatePg2(){
+	var pg = document.getElementById("curr_pg_new").value;
+	var num = parseInt(pg);
+	console.log("here");
+	if(isNaN(num)){
+		var errBox = document.getElementById("pg_error2");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("pg_error2").innerHTML = "";
+	}
+	
+}
+
+
+function displayReview2(){
+	console.log("changed");
+	var cb = document.getElementById("finish_new").checked;
+	
+	if(cb){
+		document.getElementById("reviewbox2").style.display = "block";
+	}else{
+		document.getElementById("reviewbox2").style.display = "none";
+	}
+}
+
+function updateReviewLib(title, review){
+	var bLib = localStorage.getObj('bookLib');
+	
+	for(var i=0; i<bLib.length; i++){
+		if(bLib[i].title == title){
+			bLib[i].review = bLib[i].review + "</br>" + review;
+		}
+	}
+	
+	localStorage.setObj("bookLib", bLib);
+}
+
+function validateTime2(){
+	var pg = document.getElementById("time_spent_new").value;
+	var num = parseInt(pg);
+	if(isNaN(num)){
+		var errBox = document.getElementById("time_error2");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("time_error2").innerHTML = "";
+	}
+	
 }
