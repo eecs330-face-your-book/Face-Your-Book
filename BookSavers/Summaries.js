@@ -379,6 +379,10 @@ function validateTime2(){
 	
 }
 
+function openForm() {
+	document.getElementById("myForm").style.display = "block";
+}
+
 function emptyStrings(arr){
 	for(var i=0; i < arr.length; i++){
 		if(arr[i] != ""){

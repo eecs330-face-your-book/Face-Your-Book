@@ -194,11 +194,17 @@ button {
 }
 
 .summary-display{
-    display: none;
-  position: relative;
-  left: 30%;
-  top: 20%;
-  z-index: 9;
+	z-index: 30;
+	border-radius: 1em;
+	border: 1px solid #000000;
+	background-color: #B23850;
+	width: 300px;
+	margin-left: 40%;
+	margin-top: 7%;
+	position: fixed;
+	display: none;
+
+
 
 }
 
@@ -224,7 +230,6 @@ button {
 	margin-left: 40%;
 	margin-bottom: 2%;
 }
-
 
 /* The popup form - hidden by default */
 .pg-popup {
