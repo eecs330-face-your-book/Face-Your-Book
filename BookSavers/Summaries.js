@@ -66,7 +66,8 @@ function viewSummaries() {
 
             if (val.length == 0) {
                 sums = "No summary listed";
-            } else if (val[0] == "") {
+				
+            } else if (emptyStrings(val)) {
                 sums = "No summary listed";
             } else {
                 for (var i = 0; i < val.length; i++) {
@@ -134,7 +135,6 @@ function updateBookLog() {
         TN.setAttribute("style", "margin-bottom: 0%; text-decoration: underline; cursor: pointer;");
         TN.onclick = (function() {
             var curInd = i;
-            console.log("!!");
             return function() {
                 displayPgUpdate(curInd + '');
             }
