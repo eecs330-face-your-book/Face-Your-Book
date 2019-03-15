@@ -11,33 +11,32 @@ function init(){
 
 function submitChange(){
 	var user = localStorage.getObj('user')[0];
-	var username = user.name;
+	var pw = user.pw;
 	
-	var curUsr = document.getElementById('curUsr').value;
-	var newUsr = document.getElementById('newUsr').value;
-	var repeatUsr = document.getElementById('repeatUsr').value;
+	var curPw = document.getElementById('curPw').value;
+	var newPw = document.getElementById('newPw').value;
+	var repeatPw = document.getElementById('repeatPw').value;
 	
 	document.getElementById('curErr').innerHTML = "";
 	document.getElementById('newErr').innerHTML = "";
 	document.getElementById('repeatErr').innerHTML = "";
 
-	if(curUsr != username){
+	if(curPw != pw){
 		var errBox = document.getElementById('curErr');
-		errBox.innerHTML = " Username doesn't match your username";
+		errBox.innerHTML = " Password doesn't match your password";
 	}else{
-		if(newUsr != repeatUsr){
+		if(newPw != repeatPw){
 			var errBox = document.getElementById('repeatErr');
-			errBox.innerHTML = " New usernames don't match each other";
-		}else if(newUsr == ""){
+			errBox.innerHTML = " New passwords don't match each other";
+		}else if(newPw == ""){
 			var errBox = document.getElementById('newErr');
-			errBox.innerHTML = " Please enter a new username";
+			errBox.innerHTML = " Please enter a new password";
 		}else{
-			user.name = newUsr;
+			user.pw = newPw;
 			localStorage.setObj('user', [user]);
-			var msg = "Updated username";
+			var msg = "Updated password";
 			popupReward(msg);
-
-			document.getElementById("update-usr").reset();
+			document.getElementById("update-pw").reset();
 		}
 	}
 	

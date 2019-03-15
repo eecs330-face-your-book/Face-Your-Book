@@ -27,9 +27,8 @@
                   <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Account Settings</a></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Other Information</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
                      <li role="presentation" class="divider"></li>
                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
                   </ul>
@@ -50,15 +49,15 @@
             <fieldset>
                <legend>Update Username</legend>
                <div>
-                  <label for="curUsr">Current Username:</label>
+                  <label for="curUsr">Current Username:<span id="curErr"></span></label>
                   <input name="curUsr" id="curUsr"></input>
                </div>
 				<div>
-				  <label for="newUsr">New Username:</label>
+				  <label for="newUsr">New Username:<span id="newErr"></span></label>
                   <input name="newUsr" id="newUsr"></input>
 				</div>
 				<div>
-				  <label for="repeatUsr">Repeat New Username:</label>
+				  <label for="repeatUsr">Repeat New Username:<span id="repeatErr"></span></label>
                   <input name="repeatUsr" id="repeatUsr"></input>
 				</div>
 				<div>
