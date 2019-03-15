@@ -22,7 +22,7 @@ form div + div {
 label {
   /* To make sure that all labels have the same size and are properly aligned */
   display: inline-block;
-  width: 188px;
+  width: 375px;
   text-align: left;
 }
 
@@ -331,4 +331,14 @@ button {
 #add-review-text2 {
 	background-color: #E7E3D4;
 	margin-bottom: 4%;
+}
+
+.errMsg {
+	font-weight: normal;
+	color: #B23850;
+}
+
+.errMsg2 {
+	font-weight: normal;
+	color: white;
 }

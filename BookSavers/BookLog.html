@@ -11,58 +11,54 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="booklog.js"></script>
-
       <nav class="navbar navbar-default">
          <div class="container-fluid">
             <ul class="nav navbar-nav">
-				<li><div id = "logo">
-            <img src="images/logo8.png">
-         </div></li>
+               <li>
+                  <div id = "logo">
+                     <img src="images/logo8.png">
+                  </div>
+               </li>
                <li><a href="dashboard.html">Dashboard</a></li>
                <li class="active"><a href="BookLog.html">Book Log</a></li>
                <li><a href="Summaries.html">Summaries</a></li>
                <li><a href="Recommendations.html">Find a New Book</a></li>
                <li><a href="rewards.html">MyRewards</a></li>
-			   <li><div class="user_button">
-               <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">About Us</a></li>
-                     <li role="presentation" class="divider"></li>
-                     <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signout()">Sign Out</a></li>
-                  </ul>
-               </div>
-           </div>
-              </li>
+               <li>
+                  <div class="user_button">
+                     <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">About Us</a></li>
+                           <li role="presentation" class="divider"></li>
+                           <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signout()">Sign Out</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </li>
             </ul>
          </div>
-
       </nav>
-	  <div class="summary-display" id="sum-display">
-			<h1>Summary</h1>
-			<p id="sumdisplay-text">Default text</p>
-			<button id="closeSum" onclick="closeSummary()">Close</button>
-	  </div>
-
-    <div class="popup">
-      <ul class="inv" id="popupList">
-      </ul>
-    </div>
-
+      <div class="summary-display" id="sum-display">
+         <h1>Summary</h1>
+         <p id="sumdisplay-text">Default text</p>
+         <button id="closeSum" onclick="closeSummary()">Close</button>
+      </div>
+      <div class="popup">
+         <ul class="inv" id="popupList">
+         </ul>
+      </div>
       <div class="bookLog" id="plot">
-        <canvas id="bookPlot"> </canvas>
+         <canvas id="bookPlot"> </canvas>
       </div>
-
       <div class="bookLog">
-	<h1>Book Log</h1>
-        <ul id="bookLogList">
-
-        </ul>
+         <h1>Book Log</h1>
+         <ul id="bookLogList">
+         </ul>
       </div>
-
       <div class="log_form">
          <form id="form-log">
             <fieldset>
@@ -76,22 +72,21 @@
                   <input type="text" name="author">
                </div>
                <div>
-                  <label for="curr_pg">Current Page:</label>
-                  <input type="text" name="curr_pg">
+                  <label for="curr_pg">Current Page:<span id="pg-error" class="errMsg"></span></label>
+                  <input type="text" name="curr_pg" id="curr_pg" onfocusout="validatePg()">
                </div>
                <div>
-                  <label for="time_spent">Time Spent (in hours): </label>
-                  <input type="text" name="time_spent">
+                  <label for="time_spent">Time Spent (in hours): <span class="errMsg" id="time-error"></span></label>
+                  <input type="text" name="time_spent" id="time_spent" onfocusout="validateTime()">
                </div>
                <div>
                   <button type="button" onclick="openForm()">Add a Summary</button>
                   <label for="finished" id="check-label">Finished the Book?</label>
                   <input type="checkbox" name="finished" id="checkbox" onclick="displayReview()">
                </div>
-			   
-				<div id="reviewbox">
-					<label for="review">Input review:</label>
-					<textarea name="review" rows="8" cols="48" id="add-review-text"></textarea>
+               <div id="reviewbox">
+                  <label for="review">Input review:</label>
+                  <textarea name="review" rows="8" cols="48" id="add-review-text"></textarea>
                </div>
                <div>
                   <button type="button" id="submit" onclick="submitLog()">Submit</button>
@@ -107,31 +102,33 @@
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
          </form>
       </div>
-	  <div class="pg-popup" id="update-pages">
-         <form class="pgform-container">
-            <h1>Update information for <div id="pg-title"></div/></h1>
-            <div>
-                  <label for="curr_pg">Current Page:</label>
-                  <input type="text" name="curr_pg" id="curr_pg_new">
-               </div>
-               <div>
-                  <label for="time_spent">Time Spent (in hours): </label>
-                  <input type="text" name="time_spent" id="time_spent_new">
-               </div>
-			   <div>
-					<label for="finished" id="check-label">Finished the Book?</label>
-                  <input type="checkbox" name="finished" id="finish_new" onclick="displayReview2()">
-               </div>
-			   <div id="reviewbox2">
-					<label for="review">Input review:</label>
-					<textarea name="review" rows="8" cols="28" id="add-review-text2"></textarea>
-               </div>
-			<button type="button" onclick="openForm()">Add a Summary</button>
-            <button type="button" class="btn" onclick="pgSubmit()">Done</button>
-            <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
-         </form>
+      <div class="pg-popup" id="update-pages">
+      <form class="pgform-container">
+         <h1>
+            Update information for 
+            <div id="pg-title">
+               </div/>
+         </h1>
+         <div>
+         <label for="curr_pg">Current Page:<span id="pg_error2" class="errMsg2"></span></label>
+         <input type="text" name="curr_pg" id="curr_pg_new" onfocusout="validatePg2()">
+         </div>
+         <div>
+         <label for="time_spent">Time Spent (in hours):<span id="time_error2" class="errMsg2"></span></label>
+         <input type="text" name="time_spent" id="time_spent_new" onfocusout="validateTime2()">
+         </div>
+         <div>
+         <label for="finished" id="check-label">Finished the Book?</label>
+         <input type="checkbox" name="finished" id="finish_new" onclick="displayReview2()">
+         </div>
+         <div id="reviewbox2">
+         <label for="review">Input review:</label>
+         <textarea name="review" rows="8" cols="28" id="add-review-text2"></textarea>
+         </div>
+         <button type="button" onclick="openForm()">Add a Summary</button>
+         <button type="button" class="btn" onclick="pgSubmit()">Done</button>
+         <button type="button" class="btn cancel" onclick="closepgForm()">Cancel</button>
+      </form>
       </div>
-
-
    </body>
 </html>

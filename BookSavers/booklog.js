@@ -448,6 +448,8 @@ function submitLog() {
    document.getElementById("summary-text").value = "";
    document.getElementById("reviewbox").style.display = "none";
    localStorage.setObj('sums', "");
+   document.getElementById("pg-error").innerHTML = "";
+   document.getElementById("time-error").innerHTML = "";
    return false;
 
 }
@@ -634,4 +636,53 @@ function updateReviewLib(title, review){
 	}
 	
 	localStorage.setObj("bookLib", bLib);
+}
+
+function validatePg(){
+	var pg = document.getElementById("curr_pg").value;
+	var num = parseInt(pg);
+	if(isNaN(num)){
+		var errBox = document.getElementById("pg-error");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("pg-error").innerHTML = "";
+	}
+	
+}
+
+function validateTime(){
+	var pg = document.getElementById("time_spent").value;
+	var num = parseInt(pg);
+	if(isNaN(num)){
+		var errBox = document.getElementById("time-error");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("time-error").innerHTML = "";
+	}
+	
+}
+
+function validatePg2(){
+	var pg = document.getElementById("curr_pg_new").value;
+	var num = parseInt(pg);
+	console.log("here");
+	if(isNaN(num)){
+		var errBox = document.getElementById("pg_error2");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("pg_error2").innerHTML = "";
+	}
+	
+}
+
+function validateTime2(){
+	var pg = document.getElementById("time_spent_new").value;
+	var num = parseInt(pg);
+	if(isNaN(num)){
+		var errBox = document.getElementById("time_error2");
+		errBox.innerHTML = " Please only enter numbers";
+	}else {
+		document.getElementById("time_error2").innerHTML = "";
+	}
+	
 }
