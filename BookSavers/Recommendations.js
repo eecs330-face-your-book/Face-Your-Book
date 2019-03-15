@@ -171,12 +171,11 @@ function updateBookLib() {
       var rating = bList[i].rating;
 
 
-      var TN = document.createElement('p');
+      var TN = document.createElement('span');
 	  var icon = document.createElement('i');
 	  icon.setAttribute("class", "material-icons md-6");
 	  icon.innerHTML = "shopping_cart";
-      TN.innerHTML = name + ": " + rating + "/5";
-	  TN.appendChild(icon);
+      TN.innerHTML = name;
       TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
 
 	  TN.onclick = (function() {
@@ -185,10 +184,16 @@ function updateBookLib() {
 			  takeAmazon(title);
 		  }
 	  })();
+	  
+	  	
+	  var ratDiv = document.createElement('div');
+	  ratDiv.innerHTML = rating + "/5";
+	  ratDiv.setAttribute("style", "margin-left: 7%");
 
-
-
+	  li.setAttribute("style", "margin-left: 4%; margin-top: 1%;");
+	  li.appendChild(icon);
       li.appendChild(TN);
+	  li.appendChild(ratDiv);
 
       var TN = document.createElement('p');
       TN.innerHTML = review;
@@ -204,6 +209,7 @@ function updateBookLib() {
 	if(numFound == 0){
 	  ul.setAttribute("style", "list-style-type: none;");
       var li = document.createElement("li");
+	  
 	  var TN = document.createElement('p');
       TN.innerHTML = "No similar books have been found. Please choose another book that is similar.";
       TN.setAttribute("style", "margin-bottom: 0%;");
@@ -265,8 +271,11 @@ function updateBookLib() {
           sum.setAttribute("style", "margin-top: 2%; margin-bottom: 2%;");
           sum.appendChild(document.createTextNode("Click to view summary."));
 
-          var TN = document.createElement('p');
-          TN.innerHTML = name + ": " + rating + "/5";
+		  var icon = document.createElement('i');
+		  icon.setAttribute("class", "material-icons md-6");
+		  icon.innerHTML = "shopping_cart";
+          var TN = document.createElement('span');
+          TN.innerHTML = name;
           TN.setAttribute("style", "margin-bottom: 0%; cursor: pointer; text-decoration: underline;");
 		  TN.onclick = (function() {
 		  var title = name;
@@ -274,8 +283,16 @@ function updateBookLib() {
 			  takeAmazon(title);
 		  }
 	  })();
+			
+		  var ratDiv = document.createElement('div');
+		  ratDiv.innerHTML = rating + "/5";
+		  ratDiv.setAttribute("style", "margin-left: 7%");
 
+	  
+		  li.setAttribute("style", "margin-left: 4%; margin-top: 1%;");
+		  li.appendChild(icon);
           li.appendChild(TN);
+		  li.appendChild(ratDiv);
 
           var TN = document.createElement('p');
           TN.innerHTML = review;
