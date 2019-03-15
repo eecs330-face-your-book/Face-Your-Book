@@ -341,6 +341,8 @@ function displaySummary(ind){
 	var sums = "";
 	if(val.length == 0){
 		sums = "No summary listed";
+	}else if(emptyStrings(val)){
+		sums = "No summary listed";
 	}else{
 		for(var i=0; i < val.length; i++){
 			sums += val[i];
@@ -685,4 +687,13 @@ function validateTime2(){
 		document.getElementById("time_error2").innerHTML = "";
 	}
 	
+}
+
+function emptyStrings(arr){
+	for(var i=0; i < arr.length; i++){
+		if(arr[i] != ""){
+			return false;
+		}
+	}
+	return true;
 }
