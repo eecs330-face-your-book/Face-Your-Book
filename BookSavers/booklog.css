@@ -305,3 +305,20 @@ button {
   z-index: 2;
 
 }
+
+#reviewbox {
+	display: none;
+}
+
+#add-review-text {
+	background-color: #E7E3D4;
+}
+
+#reviewbox2 {
+	display: none;
+}
+
+#add-review-text2 {
+	background-color: #E7E3D4;
+	margin-bottom: 4%;
+}

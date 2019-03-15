@@ -327,6 +327,7 @@ function pgSubmit() {
 	localStorage.setObj('books', bList);
 	updateBookLog();
 	localStorage.setObj('sums', "");
+	document.getElementById("reviewbox2").style.display = "none";
 }
 
 function displaySummary(ind){
@@ -437,6 +438,7 @@ function submitLog() {
    updateBookLog();
    document.getElementById("form-log").reset();
    document.getElementById("summary-text").value = "";
+   document.getElementById("reviewbox").style.display = "none";
    localStorage.setObj('sums', "");
    return false;
 
@@ -588,4 +590,27 @@ function signout(){
 	localStorage.clear();
 	window.open("login.html", "_top");
 	
+}
+
+function displayReview(){
+	console.log("changed");
+	var cb = document.getElementById("checkbox").checked;
+	
+	if(cb){
+		document.getElementById("reviewbox").style.display = "block";
+	}else{
+		document.getElementById("reviewbox").style.display = "none";
+	}
+}
+
+
+function displayReview2(){
+	console.log("changed");
+	var cb = document.getElementById("finish_new").checked;
+	
+	if(cb){
+		document.getElementById("reviewbox2").style.display = "block";
+	}else{
+		document.getElementById("reviewbox2").style.display = "none";
+	}
 }

@@ -86,7 +86,13 @@
                <div>
                   <button type="button" onclick="openForm()">Add a Summary</button>
                   <label for="finished" id="check-label">Finished the Book?</label>
-                  <input type="checkbox" name="finished">
+                  <input type="checkbox" name="finished" id="checkbox" onclick="displayReview()">
+               </div>
+			   
+				<div id="reviewbox">
+					<label for="review">Input review:</label>
+					<textarea name="review" rows="8" cols="48" id="add-review-text">
+					</textarea>
                </div>
                <div>
                   <button type="button" id="submit" onclick="submitLog()">Submit</button>
@@ -115,7 +121,12 @@
                </div>
 			   <div>
 					<label for="finished" id="check-label">Finished the Book?</label>
-                  <input type="checkbox" name="finished" id="finish_new">
+                  <input type="checkbox" name="finished" id="finish_new" onclick="displayReview2()">
+               </div>
+			   <div id="reviewbox2">
+					<label for="review">Input review:</label>
+					<textarea name="review" rows="8" cols="28" id="add-review-text2">
+					</textarea>
                </div>
 			<button type="button" onclick="openForm()">Add a Summary</button>
             <button type="button" class="btn" onclick="pgSubmit()">Done</button>
