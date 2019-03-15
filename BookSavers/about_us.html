@@ -1,0 +1,47 @@
+<html>
+   <head>
+      <title>About Us</title>
+   </head>
+   <body onload="init()">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="booksavers.css">
+      <link rel="stylesheet" href="dashboard.css">
+      <link rel="stylesheet" href="login.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="dashboard.js"></script>
+
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <ul class="nav navbar-nav">
+				<li><div id = "logo">
+            <img src="images/logo8.png">
+         </div></li>
+               <li><a href="Dashboard.html">Dashboard</a></li>
+               <li><a href="BookLog.html">Book Log</a></li>
+               <li><a href="Summaries.html">Summaries</a></li>
+               <li><a href="Recommendations.html">Find a New Book</a></li>
+               <li><a href="rewards.html">MyRewards</a></li>
+			   <li><div class="user_button">
+               <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="material-icons md-36">account_circle</i>
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updateUsr.html">Change Username</a></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" href="updatePw.html">Change Password</a></li>
+		     <li role="presentation"><a role="menuitem" tabindex="-1" href="about_us.html">About Us</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation"><a role="menuitem" tabindex="-1" onclick="signout()">Sign Out</a></li>
+                  </ul>
+               </div>
+            </div></li>
+            </ul>
+         </div>
+      </nav>
+      <div class="loginbox">
+	      <p id="login"> Welcome to Booksavers! We are Tom Barnett, Josh Fields, and Isaac Rivera, and our goal is to help you read more and enjoy doing so! We know that there are other ways to spend your time, but we hope that you consider the benefits of reading before choosing to spend your time doing other activies. Reading fosters creativity, empathy, and critical thinking for people of all ages; there really are no downsides to increasing the amount that you read. We've added features to help you get motivated to read more and keep track of your progress as you read. We hope you enjoy!</p>
+      </div>
+     </body>
+</html>
