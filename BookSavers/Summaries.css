@@ -209,18 +209,16 @@ button {
 .open-button:hover {
 	opacity: 1;
 }
-
 .summary-display {
-	z-index: 30;
+	z-index: 300;
 	border-radius: 1em;
 	border: 1px solid #000000;
 	background-color: #B23850;
 	width: 300px;
-	margin-left: 40%;
-	margin-top: 7%;
-	position: fixed;
+	position: relative;
 	display: none;
-	
+	float: left;
+	margin-left: -25%;
 }
 
 .summary-display h1 {

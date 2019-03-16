@@ -32,8 +32,10 @@ label {
 }
 
 #form-log {
-	float: right;
-	margin-right: 10%;
+	float: left;
+	margin-left: 10%;
+	position: relative;
+	z-index: 1;
 }
 
 input {
@@ -100,6 +102,8 @@ button {
 	float: left;
 	margin-left: 7%;
 	border-radius: 1em;
+	position: relative;
+	z-index: 1;
 }
 
 .bookLog h1 {
@@ -170,15 +174,15 @@ button {
 }
 
 .summary-display {
-	z-index: 30;
+	z-index: 300;
 	border-radius: 1em;
 	border: 1px solid #000000;
 	background-color: #B23850;
 	width: 300px;
-	margin-left: 35%;
-	margin-top: 6%;
-	position: fixed;
+	position: relative;
 	display: none;
+	float: left;
+	margin-left: -25%;
 }
 
 .summary-display h1 {
@@ -303,6 +307,8 @@ button {
 
 #plot {
 	margin-left: 5%;
+	position: relative;
+	z-index: 1;
 }
 
 
