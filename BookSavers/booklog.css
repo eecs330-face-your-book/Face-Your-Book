@@ -83,12 +83,14 @@ button {
 
 /* The popup form - hidden by default */
 
+
 .form-popup {
 	display: none;
 	position: relative;
-	left: 30%;
-	bottom: 20%;
-	z-index: 9;
+	margin-left: -35%;
+	margin-top: 5%;
+	z-index: 11;
+	float: left;
 }
 
 .bookLog {
@@ -173,8 +175,8 @@ button {
 	border: 1px solid #000000;
 	background-color: #B23850;
 	width: 300px;
-	margin-left: 30%;
-	margin-top: 7%;
+	margin-left: 35%;
+	margin-top: 6%;
 	position: fixed;
 	display: none;
 }
@@ -203,13 +205,13 @@ button {
 
 
 /* The popup form - hidden by default */
-
 .pg-popup {
 	display: none;
 	position: relative;
-	left: 30%;
-	bottom: 20%;
+	margin-left: -60%;
+	margin-top: 5%;
 	z-index: 9;
+	float: left;
 }
 
 
