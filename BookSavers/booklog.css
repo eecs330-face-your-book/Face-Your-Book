@@ -32,8 +32,10 @@ label {
 }
 
 #form-log {
-	float: right;
-	margin-right: 10%;
+	float: left;
+	margin-left: 10%;
+	position: relative;
+	z-index: 1;
 }
 
 input {
@@ -83,12 +85,14 @@ button {
 
 /* The popup form - hidden by default */
 
+
 .form-popup {
 	display: none;
 	position: relative;
-	left: 30%;
-	bottom: 20%;
-	z-index: 9;
+	margin-left: -35%;
+	margin-top: 5%;
+	z-index: 11;
+	float: left;
 }
 
 .bookLog {
@@ -98,6 +102,8 @@ button {
 	float: left;
 	margin-left: 7%;
 	border-radius: 1em;
+	position: relative;
+	z-index: 1;
 }
 
 .bookLog h1 {
@@ -168,15 +174,15 @@ button {
 }
 
 .summary-display {
-	z-index: 30;
+	z-index: 300;
 	border-radius: 1em;
 	border: 1px solid #000000;
 	background-color: #B23850;
 	width: 300px;
-	margin-left: 30%;
-	margin-top: 7%;
-	position: fixed;
+	position: relative;
 	display: none;
+	float: left;
+	margin-left: -25%;
 }
 
 .summary-display h1 {
@@ -203,13 +209,13 @@ button {
 
 
 /* The popup form - hidden by default */
-
 .pg-popup {
 	display: none;
 	position: relative;
-	left: 30%;
-	bottom: 20%;
+	margin-left: -60%;
+	margin-top: 5%;
 	z-index: 9;
+	float: left;
 }
 
 
@@ -301,6 +307,8 @@ button {
 
 #plot {
 	margin-left: 5%;
+	position: relative;
+	z-index: 1;
 }
 
 
